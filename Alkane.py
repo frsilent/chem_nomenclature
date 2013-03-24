@@ -17,6 +17,7 @@ class Alkane:
         compound_maybe = find_one(smiles)
         print(compound_maybe.commonname)
         print(compound_maybe.smiles)
+        print(compound_maybe.mol)
 
         #once a compound is identified it can be pulled from chemspider
         #then initialized as a compound using Compound(id)
@@ -28,5 +29,5 @@ class Alkane:
 if __name__ == '__main__':
     #testing
     a = Alkane('CC(C)CC')           #CC(C)CC 2-Methylbutane
-    b = Alkane('CC(C)(C)C')         #CC(C)(C)C 2,2-Dimethylpropane
+    #b = Alkane('CC(C)(C)C')         #CC(C)(C)C 2,2-Dimethylpropane
     pass
