@@ -142,6 +142,13 @@ class Compound(object):
             self.loadextendedcompoundinfo()
         return self._commonname
 
+    @property
+    def nomenclature(self):
+        """ Retrieve the scientific nomenclature from ChemSpider """
+        if self._nomenclature is None:
+            self.loadextendedcompoundinfo()
+        return self._nomenclature
+
     def loadextendedcompoundinfo(self):
         """ Load extended compound info from the Mass Spec API """
         apiurl = 'http://www.chemspider.com/MassSpecAPI.asmx/GetExtendedCompoundInfo?CSID=%s&token=%s' % (self.csid,TOKEN)

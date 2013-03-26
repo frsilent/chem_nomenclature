@@ -7,17 +7,17 @@ class Alkane:
     A class used to implement an organic compound.
     """
 
-    chain = ('methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane')
+    chain = ('methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane',
+             'undecane','dodecane','tridecane','tetradecane','pentadecane')
     substituent = ('methyl','ethyl','propyl','butyl','pentyl')
 
     def __init__(self, smiles):
-        self.smiles = smiles #simplified molecular-input line-entry system, an ascii representation of a molecular graph
-        print(smiles)
+        #simplified molecular-input line-entry system, an ascii representation of a molecular graph
+        self.smiles = smiles
         #modify smiles to match correct query
         compound_maybe = find_one(smiles)
         print(compound_maybe.commonname)
         print(compound_maybe.smiles)
-        print(compound_maybe.mol)
 
         #once a compound is identified it can be pulled from chemspider
         #then initialized as a compound using Compound(id)
