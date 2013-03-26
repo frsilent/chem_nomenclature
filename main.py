@@ -2,7 +2,7 @@ __author__ = 'rheintze'
 
 import sys
 from PyQt4 import QtCore, QtGui
-from ui import Ui_MainWindow
+from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
 class StartQT4(QtGui.QMainWindow):
     def __init__(self, parent=None):
