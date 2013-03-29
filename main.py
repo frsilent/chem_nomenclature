@@ -10,6 +10,12 @@ class StartQT4(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        QtCore.QObject.connect(self.ui.smilesBox,QtCore.SIGNAL("textChanged()"),self.smiles_changed)
+        #QtCore.QObject.connect(self.ui.smilesBox,QtCore.SIGNAL("textChanged()"),self.smiles_changed)
+
+    def smiles_changed(self):
+        self.ui.inchlBox.setPlainText('omg!')
+
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     myapp = StartQT4()

@@ -39,7 +39,7 @@
      </url>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="chemSpider_label">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -65,7 +65,7 @@
      <string>Random</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="smiles_label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -78,7 +78,7 @@
      <string>SMILES:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="inchl_label">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -91,7 +91,7 @@
      <string>InChl</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="smilesBox">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -101,7 +101,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+   <widget class="QPlainTextEdit" name="inchlBox">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -111,7 +111,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="random_pushButton_2">
+   <widget class="QPushButton" name="create_pushButton">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -124,17 +124,66 @@
      <string>Create</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="random_pushButton_3">
+   <widget class="QPushButton" name="animate_pushButton">
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>250</y>
+      <y>200</y>
       <width>271</width>
       <height>101</height>
      </rect>
     </property>
     <property name="text">
      <string>Animate</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="nomenclature_label">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>50</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Nomenclature:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="nomenclatureBox">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>70</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="check_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>120</y>
+      <width>87</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Check!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="check_label">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>80</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

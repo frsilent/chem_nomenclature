@@ -13,6 +13,11 @@ https://github.com/cameronneylon/ChemSpiPy
 import urllib.request, urllib.error, urllib.parse
 from xml.etree import ElementTree as ET
 
+#adds IUPAC Nomenclature as an attribute of the Compound class
+#pulled from http://cactus.nci.nih.gov/chemical/structure API
+from cactusAPI import get_iupac
+
+
 __author__ = 'Matt Swain'
 __email__ = 'm.swain@me.com'
 __version__ = '1.0'
@@ -54,6 +59,7 @@ class Compound(object):
         self._image = None
         self._mol = None
         self._mol3d = None
+        self._iupac = None
 
     def __repr__(self):
         return "Compound(%r)" % self.csid
@@ -143,11 +149,11 @@ class Compound(object):
         return self._commonname
 
     @property
-    def nomenclature(self):
-        """ Retrieve the scientific nomenclature from ChemSpider """
-        if self._nomenclature is None:
+    def iupac(self):
+        """ Retrieve the IUPAC Nomenclature from the cactus API """
+        if self._iupac is None:
             self.loadextendedcompoundinfo()
-        return self._nomenclature
+        return self._iupac
 
     def loadextendedcompoundinfo(self):
         """ Load extended compound info from the Mass Spec API """
@@ -176,6 +182,8 @@ class Compound(object):
         self._xlogp = float(xlogp.text) if xlogp is not None else None
         commonname = tree.find('{http://www.chemspider.com/}CommonName')
         self._commonname = commonname.text if commonname is not None else None
+
+        self._iupac = get_iupac(self.smiles)
 
     @property
     def image(self):
@@ -207,7 +215,6 @@ class Compound(object):
             self._mol3d = tree.getroot().text
         return self._mol3d
 
-
 def find(query):
     """ Search by Name, SMILES, InChI, InChIKey, etc. Returns first 100 Compounds """
     assert type(query) == str or type(query) == str, 'query not a string object'
@@ -220,7 +227,6 @@ def find(query):
     for tag in csid_tags:
         compoundlist.append(Compound(tag.text))
     return compoundlist if compoundlist else None
-
 
 def find_one(query):
     """ Search by Name, SMILES, InChI, InChIKey, etc. Returns a single Compound """
