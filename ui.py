@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'launch.ui'
 #
-# Created: Fri Mar 29 15:45:25 2013
+# Created: Fri Mar 29 22:14:54 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,15 +36,15 @@ class Ui_MainWindow(object):
         self.smiles_label = QtGui.QLabel(self.centralwidget)
         self.smiles_label.setGeometry(QtCore.QRect(20, 160, 51, 16))
         self.smiles_label.setObjectName(_fromUtf8("smiles_label"))
-        self.inchl_label = QtGui.QLabel(self.centralwidget)
-        self.inchl_label.setGeometry(QtCore.QRect(240, 150, 41, 17))
-        self.inchl_label.setObjectName(_fromUtf8("inchl_label"))
+        self.inchi_label = QtGui.QLabel(self.centralwidget)
+        self.inchi_label.setGeometry(QtCore.QRect(240, 150, 41, 17))
+        self.inchi_label.setObjectName(_fromUtf8("inchi_label"))
         self.smilesBox = QtGui.QPlainTextEdit(self.centralwidget)
         self.smilesBox.setGeometry(QtCore.QRect(70, 150, 141, 31))
         self.smilesBox.setObjectName(_fromUtf8("smilesBox"))
-        self.inchlBox = QtGui.QPlainTextEdit(self.centralwidget)
-        self.inchlBox.setGeometry(QtCore.QRect(280, 150, 141, 31))
-        self.inchlBox.setObjectName(_fromUtf8("inchlBox"))
+        self.inchiBox = QtGui.QPlainTextEdit(self.centralwidget)
+        self.inchiBox.setGeometry(QtCore.QRect(280, 150, 141, 31))
+        self.inchiBox.setObjectName(_fromUtf8("inchiBox"))
         self.create_pushButton = QtGui.QPushButton(self.centralwidget)
         self.create_pushButton.setGeometry(QtCore.QRect(300, 60, 151, 61))
         self.create_pushButton.setObjectName(_fromUtf8("create_pushButton"))
@@ -64,6 +64,9 @@ class Ui_MainWindow(object):
         self.check_label.setGeometry(QtCore.QRect(940, 80, 101, 31))
         self.check_label.setText(_fromUtf8(""))
         self.check_label.setObjectName(_fromUtf8("check_label"))
+        self.generate_pushButton = QtGui.QPushButton(self.centralwidget)
+        self.generate_pushButton.setGeometry(QtCore.QRect(440, 150, 87, 27))
+        self.generate_pushButton.setObjectName(_fromUtf8("generate_pushButton"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1165, 27))
@@ -81,10 +84,11 @@ class Ui_MainWindow(object):
         self.chemSpider_label.setText(QtGui.QApplication.translate("MainWindow", "Additional Info:", None, QtGui.QApplication.UnicodeUTF8))
         self.random_pushButton.setText(QtGui.QApplication.translate("MainWindow", "Random", None, QtGui.QApplication.UnicodeUTF8))
         self.smiles_label.setText(QtGui.QApplication.translate("MainWindow", "SMILES:", None, QtGui.QApplication.UnicodeUTF8))
-        self.inchl_label.setText(QtGui.QApplication.translate("MainWindow", "InChl", None, QtGui.QApplication.UnicodeUTF8))
+        self.inchi_label.setText(QtGui.QApplication.translate("MainWindow", "InChi", None, QtGui.QApplication.UnicodeUTF8))
         self.create_pushButton.setText(QtGui.QApplication.translate("MainWindow", "Create", None, QtGui.QApplication.UnicodeUTF8))
         self.animate_pushButton.setText(QtGui.QApplication.translate("MainWindow", "Animate", None, QtGui.QApplication.UnicodeUTF8))
         self.nomenclature_label.setText(QtGui.QApplication.translate("MainWindow", "Nomenclature:", None, QtGui.QApplication.UnicodeUTF8))
         self.check_pushButton.setText(QtGui.QApplication.translate("MainWindow", "Check!", None, QtGui.QApplication.UnicodeUTF8))
+        self.generate_pushButton.setText(QtGui.QApplication.translate("MainWindow", "Generate", None, QtGui.QApplication.UnicodeUTF8))
 
 from PyQt4 import QtWebKit

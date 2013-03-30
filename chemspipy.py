@@ -183,6 +183,7 @@ class Compound(object):
         commonname = tree.find('{http://www.chemspider.com/}CommonName')
         self._commonname = commonname.text if commonname is not None else None
 
+        #custom field for IUPAC Nomenclature format. Pulls from Cactus API
         self._iupac = get_iupac(self.smiles)
 
     @property
