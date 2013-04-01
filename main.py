@@ -13,21 +13,17 @@ class StartQT4(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #QtCore.QObject.connect(self.ui.smilesBox,QtCore.SIGNAL("textChanged()"),self.changeInchi)
-        #QtCore.QObject.connect(self.ui.inchiBox,QtCore.SIGNAL("textChanged()"),self.enableInchi)
+        target = Alkane('CC')
 
-
-        QtCore.QObject.connect(self.ui.smilesBox,QtCore.SIGNAL("leaveEvent()"), self.changeInchi)
-
-        #QtCore.QObject.connect(self.ui.generate_pushButton,QtCore.SIGNAL("clicked()"),self.generate)
+        QtCore.QObject.connect(self.ui.generate_pushButton,QtCore.SIGNAL("clicked()"),self.generate)
 
     def changeInchi(self):
         print('Yahoo!!!!!!!')
         self.ui.inchiBox.setPlainText('omg')
 
     def generate(self):
-        target = Alkane(self.ui.inchiBox.toPlainText())
-        pass
+        #target = Alkane(self.ui.inchiBox.toPlainText())
+        print(str(self.ui.inchiBox.toPlainText()))
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

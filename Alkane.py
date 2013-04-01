@@ -15,7 +15,9 @@ class Alkane:
         #simplified molecular-input line-entry system, an ascii representation of a molecular graph
         self.smiles = smiles
 
-        #modify smiles to match correct query
+        #Thinking of getting rid of chemspider API & switching to Cactus exclusively
+        #Alternatively using Cactus' http://cactus.nci.nih.gov/chemical/structure/C/chemspider_id format
+        #Then generating compound with it
         compound_maybe = find_one(smiles)
         print(compound_maybe.smiles)
         print(compound_maybe.iupac)
@@ -24,6 +26,7 @@ class Alkane:
 
 if __name__ == '__main__':
     #testing
-    a = Alkane('CC(C)CC')           #CC(C)CC 2-Methylbutane
-    b = Alkane('CC(C)(C)C')         #CC(C)(C)C 2,2-Dimethylpropane
+    a = Alkane('C')                 #Methane // TODO: FIX THIS. ChemSpider Search is bad.
+    b = Alkane('CC(C)CC')           #CC(C)CC 2-Methylbutane
+    c = Alkane('CC(C)(C)C')         #CC(C)(C)C 2,2-Dimethylpropane
     pass
