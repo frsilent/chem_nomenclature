@@ -1,6 +1,7 @@
 __author__ = 'rheintze'
 
 from chemspipy import *
+from cactusAPI import get_csid
 
 class Alkane:
     """
@@ -11,14 +12,9 @@ class Alkane:
              'undecane','dodecane','tridecane','tetradecane','pentadecane')
     substituent = ('methyl','ethyl','propyl','butyl','pentyl')
 
-    def __init__(self, smiles):
-        #simplified molecular-input line-entry system, an ascii representation of a molecular graph
-        self.smiles = smiles
-
-        #Thinking of getting rid of chemspider API & switching to Cactus exclusively
-        #Alternatively using Cactus' http://cactus.nci.nih.gov/chemical/structure/C/chemspider_id format
-        #Then generating compound with it
-        compound_maybe = find_one(smiles)
+    def __init__(self, query):  #query will generally be in smiles or inchi
+        self.query = query
+        compound_maybe = Compound(get_csid(query))  #uses cactus search to find csid & constructs compound with it
         print(compound_maybe.smiles)
         print(compound_maybe.iupac)
 
