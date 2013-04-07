@@ -12,10 +12,12 @@ class StartQT4(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self,parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        target = Alkane('CC')
+        self.target = None
 
         QtCore.QObject.connect(self.ui.generate_pushButton,QtCore.SIGNAL("clicked()"),self.generate)
+
+
+
 
     def changeInchi(self):
         print('Yahoo!!!!!!!')
@@ -28,5 +30,7 @@ class StartQT4(QtGui.QMainWindow):
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     myapp = StartQT4()
+    myapp.target = Alkane('CC')
+
     myapp.show()
     sys.exit(app.exec_())

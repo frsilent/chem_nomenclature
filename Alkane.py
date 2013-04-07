@@ -15,14 +15,12 @@ class Alkane:
     def __init__(self, query):  #query will generally be in smiles or inchi
         self.query = query
         self.compound_maybe = Compound(get_csid(query))  #uses cactus search to find csid & constructs compound with it
-        #print(compound_maybe.smiles)
-        #print(compound_maybe.iupac)
 
         pass
 
 if __name__ == '__main__':
     #testing
-    a = Alkane('C')                 #Methane // TODO: FIX THIS. ChemSpider Search is bad.
+    a = Alkane('C')                 #C Methane
     b = Alkane('CC(C)CC')           #CC(C)CC 2-Methylbutane
     c = Alkane('CC(C)(C)C')         #CC(C)(C)C 2,2-Dimethylpropane
 
