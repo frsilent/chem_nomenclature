@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>190</y>
-      <width>621</width>
+      <width>871</width>
       <height>531</height>
      </rect>
     </property>
@@ -27,9 +27,9 @@
    <widget class="QWebView" name="chemSpiderView">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>910</x>
       <y>430</y>
-      <width>471</width>
+      <width>231</width>
       <height>291</height>
      </rect>
     </property>
@@ -39,11 +39,11 @@
      </url>
     </property>
    </widget>
-   <widget class="QLabel" name="chemSpider_label">
+   <widget class="QLabel" name="chemSpiderLabel">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>400</y>
+      <x>910</x>
+      <y>390</y>
       <width>101</width>
       <height>17</height>
      </rect>
@@ -52,20 +52,20 @@
      <string>Additional Info:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="random_pushButton">
+   <widget class="QPushButton" name="randomButton">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>60</y>
+      <x>30</x>
+      <y>20</y>
       <width>151</width>
-      <height>61</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
      <string>Random</string>
     </property>
    </widget>
-   <widget class="QLabel" name="smiles_label">
+   <widget class="QLabel" name="smilesLabel">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -78,7 +78,7 @@
      <string>SMILES:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="inchi_label">
+   <widget class="QLabel" name="inchiLabel">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -111,37 +111,24 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="create_pushButton">
+   <widget class="QPushButton" name="animateButton">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>60</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Create</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="animate_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>200</y>
-      <width>271</width>
-      <height>101</height>
+      <x>940</x>
+      <y>280</y>
+      <width>201</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="text">
      <string>Animate</string>
     </property>
    </widget>
-   <widget class="QLabel" name="nomenclature_label">
+   <widget class="QLabel" name="nomenclatureLabel">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>50</y>
+      <x>210</x>
+      <y>20</y>
       <width>111</width>
       <height>17</height>
      </rect>
@@ -153,18 +140,18 @@
    <widget class="QPlainTextEdit" name="nomenclatureBox">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>70</y>
+      <x>210</x>
+      <y>40</y>
       <width>281</width>
       <height>41</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="check_pushButton">
+   <widget class="QPushButton" name="checkButton">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>120</y>
+      <x>210</x>
+      <y>90</y>
       <width>87</width>
       <height>27</height>
      </rect>
@@ -173,11 +160,11 @@
      <string>Check!</string>
     </property>
    </widget>
-   <widget class="QLabel" name="check_label">
+   <widget class="QLabel" name="checkLabel">
     <property name="geometry">
      <rect>
-      <x>940</x>
-      <y>80</y>
+      <x>510</x>
+      <y>50</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -186,7 +173,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="generate_pushButton">
+   <widget class="QPushButton" name="generateButton">
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -206,7 +193,7 @@
      <x>0</x>
      <y>0</y>
      <width>1165</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -216,7 +203,7 @@
   <customwidget>
    <class>QWebView</class>
    <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
+   <header>QtWebKitWidgets/QWebView</header>
   </customwidget>
  </customwidgets>
  <resources/>

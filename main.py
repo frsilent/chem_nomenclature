@@ -14,18 +14,16 @@ class StartQT4(QtGui.QMainWindow):
         self.ui.setupUi(self)
         self.target = None
 
-        QtCore.QObject.connect(self.ui.generate_pushButton,QtCore.SIGNAL("clicked()"),self.generate)
-
-
-
-
-    def changeInchi(self):
-        print('Yahoo!!!!!!!')
-        self.ui.inchiBox.setPlainText('omg')
+        QtCore.QObject.connect(self.ui.generateButton,QtCore.SIGNAL("clicked()"),self.generate)
 
     def generate(self):
         #target = Alkane(self.ui.inchiBox.toPlainText())
         print(str(self.ui.inchiBox.toPlainText()))
+    def makeCarbon(self):
+        print("graphicsView clicked in")
+
+    def draw(self):
+        pass
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
