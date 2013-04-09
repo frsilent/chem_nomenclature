@@ -32,21 +32,24 @@ class View(QtGui.QGraphicsView):
         QtGui.QGraphicsView.__init__(self,parent)
 
         self.setScene(QtGui.QGraphicsScene(self))
-        # Okay. This is messy but works for now.
         # Alternatively, would be good to find a way to inherit parent.size()
-        self.setSceneRect(QtCore.QRectF(0,0,parent.width(),parent.height()))
+        self.setSceneRect(QtCore.QRectF(0,0,parent.width(),parent.height())) #Yes this is bad and I feel bad
 
         self.pix = QtGui.QPixmap('carbon.png')
 
     def mousePressEvent(self,event):
         if event.button() == QtCore.Qt.LeftButton:
-            position = QtCore.QPointF(self.mapToScene(event.pos()))
-            print('left-clicked at (%d, %d)' % (position.x(), position.y()))
+            self.position = self.mapToScene(event.pos())
+            print('left-clicked at (%d, %d)' % (self.position.x(), self.position.y()))
+
+            #self.pix.clic(self.position.x(),self.position.y())
+            #self.pix.setPos(self.position.x(),self.position.y()) #Need to place pixmap at right spot!
             self.scene().addPixmap(self.pix)
 
             #self._start = event.pos()
-        else:
-            print('right-clicked')
+        elif event.button() == QtCore.Qt.RightButton:
+            self.position = self.mapToScene(event.pos())
+            print('right-clicked at (%d, %d)' % (self.position.x(), self.position.y()))
             #self._start = event.pos()
 
     def mouseReleaseEvent(self,event):
