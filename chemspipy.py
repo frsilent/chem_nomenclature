@@ -13,8 +13,8 @@ https://github.com/cameronneylon/ChemSpiPy
 import urllib.request, urllib.error, urllib.parse
 from xml.etree import ElementTree as ET
 
-#adds IUPAC Nomenclature as an attribute of the Compound class
-#pulled from http://cactus.nci.nih.gov/chemical/structure API
+# adds IUPAC Nomenclature as an attribute of the Compound class
+# pulled from http://cactus.nci.nih.gov/chemical/structure API
 from cactusAPI import get_iupac
 
 
