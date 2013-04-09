@@ -12,6 +12,7 @@ class StartQT4(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self,parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        print(self.ui.graphicsView.size())
         self.view = View(self.ui.graphicsView)
         self.target = None
 
@@ -26,11 +27,10 @@ class StartQT4(QtGui.QMainWindow):
 class View(QtGui.QGraphicsView):
     def __init__(self,parent):
         QtGui.QGraphicsView.__init__(self,parent)
-        #TODO: This needs to be restructed so that the scene inherits the view from the graphicsview object
-        self.setScene(QtGui.QGraphicsScene(self)) #Particularly this line needs to be sized right
-        print(self.viewport().rect())
-        #self.setSceneRect(QtGui.QGraphicsView.sceneRect())
-        self.setSceneRect(QtCore.QRectF(self.viewport().rect())) #this adds box for me to draw in; kewl
+
+        self.setScene(QtGui.QGraphicsScene(self))
+        #Okay. This is messy but works for now. Alternatively, would be good to find a way to set size() to parent.size()
+        self.setSceneRect(QtCore.QRectF(0,0,parent.width(),parent.height()))
 
     def mousePressEvent(self,event):
         self._start = event.pos()
