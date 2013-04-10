@@ -42,24 +42,15 @@ class View(QtGui.QGraphicsView):
             self.position = self.mapToScene(event.pos())
             print('left-clicked at (%d, %d)' % (self.position.x(), self.position.y()))
 
-            #self.pix.clic(self.position.x(),self.position.y())
-            #self.pix.setPos(self.position.x(),self.position.y()) #Need to place pixmap at right spot!
-            self.scene().addPixmap(self.pix)
+            self.scene().addPixmap(self.pix).setPos(self.position)
 
-            #self._start = event.pos()
         elif event.button() == QtCore.Qt.RightButton:
             self.position = self.mapToScene(event.pos())
             print('right-clicked at (%d, %d)' % (self.position.x(), self.position.y()))
-            #self._start = event.pos()
+
+            self.scene().removeItem(self.scene().itemAt(self.position))
 
     def mouseReleaseEvent(self,event):
-        #start = QtCore.QPointF(self.mapToScene(self._start))
-        #end = QtCore.QPointF(self.mapToScene(event.pos()))
-        #self.scene().addItem(QtGui.QGraphicsLineItem(QtCore.QLineF(start,end)))
-        #for point in (start,end):
-            #text = self.scene().addSimpleText('(%d, %d)' % (point.x(), point.y()))
-            #text.setBrush(QtCore.Qt.red)
-            #text.setPos(point)
         pass
 
 
