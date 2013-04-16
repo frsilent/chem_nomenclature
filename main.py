@@ -58,7 +58,7 @@ class DrawView(QtGui.QGraphicsView):
         
     def addGridToScene(self):
         #Set up pen
-        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        pen = QtGui.QPen(QtCore.Qt.black, .3, QtCore.Qt.SolidLine)
         #Draw Horizontal Lines
         for y in range(0, self.num_rows-1): # don't draw the two outside edge lines
             self.scene.addLine(0, (y+1)*self.row_height, self.width, (y+1)*self.row_height, pen)
