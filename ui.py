@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'launch.ui'
 #
-# Created: Sun Apr 14 20:52:55 2013
+# Created: Tue Apr 16 11:33:19 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,16 +17,9 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(800, 600)
+        MainWindow.resize(635, 560)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.chemSpiderView = QtWebKit.QWebView(self.centralwidget)
-        self.chemSpiderView.setGeometry(QtCore.QRect(610, 150, 181, 401))
-        self.chemSpiderView.setProperty("url", QtCore.QUrl(_fromUtf8("about:blank")))
-        self.chemSpiderView.setObjectName(_fromUtf8("chemSpiderView"))
-        self.chemSpiderLabel = QtGui.QLabel(self.centralwidget)
-        self.chemSpiderLabel.setGeometry(QtCore.QRect(670, 100, 101, 17))
-        self.chemSpiderLabel.setObjectName(_fromUtf8("chemSpiderLabel"))
         self.randomButton = QtGui.QPushButton(self.centralwidget)
         self.randomButton.setGeometry(QtCore.QRect(30, 20, 151, 91))
         self.randomButton.setObjectName(_fromUtf8("randomButton"))
@@ -43,7 +36,7 @@ class Ui_MainWindow(object):
         self.inchiBox.setGeometry(QtCore.QRect(280, 150, 141, 31))
         self.inchiBox.setObjectName(_fromUtf8("inchiBox"))
         self.animateButton = QtGui.QPushButton(self.centralwidget)
-        self.animateButton.setGeometry(QtCore.QRect(540, 10, 201, 71))
+        self.animateButton.setGeometry(QtCore.QRect(520, 40, 81, 41))
         self.animateButton.setObjectName(_fromUtf8("animateButton"))
         self.nomenclatureLabel = QtGui.QLabel(self.centralwidget)
         self.nomenclatureLabel.setGeometry(QtCore.QRect(210, 20, 111, 17))
@@ -62,14 +55,16 @@ class Ui_MainWindow(object):
         self.generateButton.setGeometry(QtCore.QRect(440, 150, 87, 27))
         self.generateButton.setObjectName(_fromUtf8("generateButton"))
         self.graphicsView = QtGui.QGraphicsView(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(20, 200, 625, 325))
+        self.graphicsView.setGeometry(QtCore.QRect(20, 200, 600, 300))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.graphicsView.sizePolicy().hasHeightForWidth())
         self.graphicsView.setSizePolicy(sizePolicy)
-        self.graphicsView.setMinimumSize(QtCore.QSize(625, 325))
-        self.graphicsView.setMaximumSize(QtCore.QSize(625, 325))
+        self.graphicsView.setMinimumSize(QtCore.QSize(600, 300))
+        self.graphicsView.setMaximumSize(QtCore.QSize(600, 300))
+        self.graphicsView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.graphicsView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.NoBrush)
         self.graphicsView.setBackgroundBrush(brush)
@@ -78,9 +73,12 @@ class Ui_MainWindow(object):
         self.graphicsView.setForegroundBrush(brush)
         self.graphicsView.setSceneRect(QtCore.QRectF(0.0, 0.0, 600.0, 300.0))
         self.graphicsView.setObjectName(_fromUtf8("graphicsView"))
+        self.clearButton = QtGui.QPushButton(self.centralwidget)
+        self.clearButton.setGeometry(QtCore.QRect(310, 90, 51, 27))
+        self.clearButton.setObjectName(_fromUtf8("clearButton"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 635, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -92,7 +90,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Chem Wizard", None, QtGui.QApplication.UnicodeUTF8))
-        self.chemSpiderLabel.setText(QtGui.QApplication.translate("MainWindow", "Additional Info:", None, QtGui.QApplication.UnicodeUTF8))
         self.randomButton.setText(QtGui.QApplication.translate("MainWindow", "Random", None, QtGui.QApplication.UnicodeUTF8))
         self.smilesLabel.setText(QtGui.QApplication.translate("MainWindow", "SMILES:", None, QtGui.QApplication.UnicodeUTF8))
         self.inchiLabel.setText(QtGui.QApplication.translate("MainWindow", "InChi", None, QtGui.QApplication.UnicodeUTF8))
@@ -100,5 +97,5 @@ class Ui_MainWindow(object):
         self.nomenclatureLabel.setText(QtGui.QApplication.translate("MainWindow", "Nomenclature:", None, QtGui.QApplication.UnicodeUTF8))
         self.checkButton.setText(QtGui.QApplication.translate("MainWindow", "Check!", None, QtGui.QApplication.UnicodeUTF8))
         self.generateButton.setText(QtGui.QApplication.translate("MainWindow", "Generate", None, QtGui.QApplication.UnicodeUTF8))
+        self.clearButton.setText(QtGui.QApplication.translate("MainWindow", "Clear", None, QtGui.QApplication.UnicodeUTF8))
 
-from PyQt4 import QtWebKit
