@@ -18,20 +18,21 @@ class Alkane:
         self.initGraph(matrix)
 #        self.longestChain = self.getLongestChain()
     
-    #Initialize graph based on carbon matrix    
+    #Initialize graph and carbon list based on carbon matrix    
     def initGraph(self, graphicMatrix):
         width = len(graphicMatrix)
         height = len(graphicMatrix[0])
         #Dict of position tuples to carbon objects
         #Used to remember where we have already found carbons 
         carbonDict = {}
-        for col_index in range(0, width-1):
-            for row_index in range(0, height-1):
+        for col_index in range(0, width):
+            for row_index in range(0, height):
                 #Skip empty spaces
                 if not graphicMatrix[col_index][row_index]:
                     continue
                 thisCarbon = Carbon()
-                #Remember that this carbon is here for when we make our double-links
+                self.carbons.append(thisCarbon)
+                #Remember that this carbon is at this location for when we make our double-links
                 carbonDict[(row_index, col_index)] = thisCarbon
                 otherCarbon = None
                 #Have we found our first carbon? 
@@ -53,7 +54,6 @@ class Alkane:
                     #Create double-link between our Carbon nodes
                     thisCarbon.north = otherCarbon
                     otherCarbon.south = thisCarbon
-            
     #Validation help
     def isConnected(self, graphicMatrix):
         pass
