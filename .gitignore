@@ -8,6 +8,9 @@
 # Java class files
 *.class
 
+# Compiled Python files
+*.pyc
+
 # generated files
 bin/
 gen/
@@ -27,3 +30,4 @@ proguard/
 *.ipr
 *.iws
 .idea/
+__pycache__
