@@ -142,7 +142,6 @@ if __name__ == '__main__':
     import sys
     app = QtGui.QApplication(sys.argv)
     myapp = StartQT4()
-    myapp.target = Alkane('CC')
 
     myapp.show()
     sys.exit(app.exec_())

@@ -2,7 +2,8 @@ __author__ = 'rheintze'
 
 from chemspipy import *
 from cactusAPI import get_csid
-import Carbon
+from Carbon import Carbon
+from Exceptions import *
 class Alkane:
     """
     A class used to implement an organic compound.
@@ -16,6 +17,13 @@ class Alkane:
         self.carbons = []
         self.head = None
         self.initGraph(matrix)
+        if self.head == None:
+            raise EmptyAlkaneError()
+        isConnected, hasCycles = self.isConnectedHasCycles()
+        if not isConnected:
+            raise AlkaneNotConnectedError()
+        if hasCycles:
+            raise CyclicAlkaneError()
 #        self.longestChain = self.getLongestChain()
     
     #Initialize graph and carbon list based on carbon matrix    
@@ -54,9 +62,34 @@ class Alkane:
                     #Create double-link between our Carbon nodes
                     thisCarbon.north = otherCarbon
                     otherCarbon.south = thisCarbon
-    #Validation help
-    def isConnected(self, graphicMatrix):
-        pass
+                    
+    #Check if carbons are connected and graph has no cycles
+    def isConnectedHasCycles(self):
+        isConnected = True
+        hasCycles = False
+        totalSet = set(self.carbons)
+        connectedSet = set()
+        try:
+            self.addCarbonsToSet(head, connectedSet)
+        except:
+            hasCycles = True
+        if totalSet != connectedSet:
+            isConnected = false
+        return (isConnected, hasCycles)
+        
+    def addCarbonsToSet(self, carbon, carbonSet, ignoreDirection=None):
+        if carbon in carbonSet:
+            raise CyclicAlkeneError()
+        else:
+            carbonSet.append(carbon)
+        if carbon.north and ignoreDirect != 'north':
+            self.addCarbonsToSet(carbon.north, carbonSet, 'south')
+        if carbon.east and ignoreDirect != 'east':
+            self.addCarbonsToSet(carbon.north, carbonSet, 'west')
+        if carbon.south and ignoreDirect != 'south':
+            self.addCarbonsToSet(carbon.north, carbonSet, 'north')
+        if carbon.west and ignoreDirect != 'west':
+            self.addCarbonsToSet(carbon.north, carbonSet, 'east')
 
 #    def __init__(self, query):  #query will generally be in smiles or inchi
 #        self.query = query

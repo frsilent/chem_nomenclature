@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'launch.ui'
 #
-# Created: Tue Apr 16 11:33:19 2013
+# Created: Tue Apr 16 21:44:08 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         self.clearButton = QtGui.QPushButton(self.centralwidget)
         self.clearButton.setGeometry(QtCore.QRect(310, 90, 51, 27))
         self.clearButton.setObjectName(_fromUtf8("clearButton"))
+        self.validateButton = QtGui.QPushButton(self.centralwidget)
+        self.validateButton.setGeometry(QtCore.QRect(370, 90, 87, 27))
+        self.validateButton.setObjectName(_fromUtf8("validateButton"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 635, 25))
@@ -98,4 +101,5 @@ class Ui_MainWindow(object):
         self.checkButton.setText(QtGui.QApplication.translate("MainWindow", "Check!", None, QtGui.QApplication.UnicodeUTF8))
         self.generateButton.setText(QtGui.QApplication.translate("MainWindow", "Generate", None, QtGui.QApplication.UnicodeUTF8))
         self.clearButton.setText(QtGui.QApplication.translate("MainWindow", "Clear", None, QtGui.QApplication.UnicodeUTF8))
+        self.validateButton.setText(QtGui.QApplication.translate("MainWindow", "Validate", None, QtGui.QApplication.UnicodeUTF8))
 
