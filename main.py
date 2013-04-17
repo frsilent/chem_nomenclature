@@ -15,12 +15,20 @@ class StartQT4(QtGui.QMainWindow):
         self.ui.setupUi(self)
         self.view = DrawView(self.ui.graphicsView)
 
-        self.target = None
+        self.molecule = None
 
         #function bindings
         QtCore.QObject.connect(self.ui.generateButton,QtCore.SIGNAL("clicked()"),self.generate)
+        QtCore.QObject.connect(self.ui.validateButton,QtCore.SIGNAL("clicked()"),self.validate)
         QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.view.clearCarbons)
 
+    def validate(self):
+        carbonMatrix = self.view.getCarbonMatrix()
+        try:
+            self.molecule = Alkane(carbonMatrix)
+        except:
+            pass
+    
     def generate(self):
         pass
 
@@ -80,29 +88,23 @@ class DrawView(QtGui.QGraphicsView):
                     #Draw the carbon image at 
                     qp.drawImage(coords[0], coords[1], self.carbonImage)
     
-    #Add or remove carbons based on click position and mouse button
+    #Add or remove carbons based on selected square status
     def mousePressEvent(self,event):
         #Convert global QT coordinates to logical coordinates
         x,y = self.screenToLogical(event.pos())
-        print("Logical",x,y)
-        screen_pos = self.logicalToScreen((x,y))
-        print("Screen",screen_pos)
-        #Left click to add a carbon
-        if event.button() == QtCore.Qt.LeftButton:
-            #Is this square empty?
-            if not self.carbonMatrix[x][y]:
-                #Place a carbon in this square
-                self.carbonMatrix[x][y]=self.scene.addPixmap(self.carbonImage)
-                #Add carbon image to screen
-                self.carbonMatrix[x][y].setOffset(*screen_pos)
-        #Right click to remove a carbon
-        elif event.button() == QtCore.Qt.RightButton:
-            #Is this square filled?
-            if self.carbonMatrix[x][y]:
-                #Remove the carbon from this square
-                self.scene.removeItem(self.carbonMatrix[x][y])
-                #Remove carbon image from scene
-                self.carbonMatrix[x][y]=None
+        #Is this square empty?
+        if not self.carbonMatrix[x][y]:
+            #Place a carbon in this square
+            self.carbonMatrix[x][y]=self.scene.addPixmap(self.carbonImage)
+            #Get top-left screen coordinates of this square 
+            screen_pos = self.logicalToScreen((x,y))
+            #Add carbon image to screen
+            self.carbonMatrix[x][y].setOffset(*screen_pos)
+        else:
+            #Remove the carbon from this square
+            self.scene.removeItem(self.carbonMatrix[x][y])
+            #Remove carbon image from scene
+            self.carbonMatrix[x][y]=None
     
     #Return (x,y) in logical, safe carbonMatrix coordinates    
     def screenToLogical(self, position):
@@ -132,7 +134,9 @@ class DrawView(QtGui.QGraphicsView):
         for item in self.scene.items():
             if type(item) is QtGui.QGraphicsPixmapItem:
                 self.scene.removeItem(item)
-
+    
+    def getCarbonMatrix(self):
+        return self.carbonMatrix
 
 if __name__ == '__main__':
     import sys
