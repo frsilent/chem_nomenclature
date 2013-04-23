@@ -1,59 +1,96 @@
+from custom_exceptions import *
+
 class Carbon:
     """
     A class used to represent a carbon in an alkane molecule
     """
     #Ordered such that directions[i] opposes directions[3-i]
-    directions = ('north', 'east', 'west', 'south')
-    
+    @staticmethod
+    def directions():
+        return ('north', 'east', 'west', 'south')
+    @staticmethod
+    def getOpposingDirection(direction):
+        return Carbon.directions()[3-Carbon.directions().index(direction)]
+        
     def __init__(self):
         self.north = self.south = self.east = self.west = None
     
     def getLongestChain(self):
         return self._getLongestChain()            
     
-    def _getLongestChain(self, carbon=self, ignoreDirection=None):
+    def _getLongestChain(self, ignoreDirection=None):
         #Append this carbon to the chain
-        chain = [carbon]
+        chain = [self]
         #List of directions that have carbons and are not ignoreDirection
-        validDirections = []
-        for dir in Carbon.directions:
+        validChains = []
+        for dir in Carbon.directions():
             if dir == ignoreDirection:
                 continue
-            if getattr(carbon, dir):
-                validDirections.append(dir)
-        #Are there branches we need to add to our chain? 
-        if any(validDirections):
-            validChains = []
-            #Populate validChains with lists of Carbons
-            for dir in validDirections:
-                opposingDirection = Carbon.directions[3-Carbon.directions.index(dir)]
-                validChains.append(getLongestChain(carbon = getattr(carbon, dir), ignoreDirection = opposingDirection))
-            #Extend our chain with the longest chain we found
-            chain.extend(max(validChains, key=len))
+            if getattr(self, dir):
+                opposingDirection = Carbon.getOpposingDirection(dir)
+                nextCarbon = getattr(self, dir)
+                validChains.append(nextCarbon._getLongestChain(opposingDirection))
+            if any(validChains):
+                #Extend our chain with the longest chain we found
+                chain.extend(max(validChains, key=len))
         return chain
     
     def getConnectedSet(self):
         return self._getConnectedCarbonSet()
     
     #Helper recursive method for isConnectedHasCycles    
-    def _getConnectedSet(self, carbon=self, carbonSet=set(), ignoreDirection=None):
+    def getConnectedSet(self, carbonSet=set(), ignoreDirection=None):
         #Ordered such that directions[i] opposes directions[3-i] 
         directions = ('north', 'east', 'west', 'south')
-        if carbon in carbonSet:
+        if self in carbonSet:
             raise CyclicAlkeneError()
         else:
-            carbonSet.append(carbon)
-        for dir_index in range(len(directions)):
-            if ignoreDirection and directions[dir_index] == ignoreDirection:
+            carbonSet.add(self)
+        for dir in directions:
+            if dir == ignoreDirection:
                 continue
-            nextCarbon = getattr(carbon, direction)
+            nextCarbon = getattr(self, dir)
             if nextCarbon:
-                self._getConnectedCarbonSet(nextCarbon, carbonSet, directions[3-dir_index])
+                opposingDirection = Carbon.getOpposingDirection(dir)
+                nextCarbon.getConnectedSet(carbonSet, opposingDirection)
         return carbonSet
     
     def getNumberOfBonds(self):
         num = 0
-        for dir in Carbon.directions:
+        for dir in Carbon.directions():
             if getattr(self,dir):
                 num+=1
         return num
+
+    def getDirectionTo(self, carbon):
+        for direction in Carbon.directions():
+            if getattr(self, direction) == carbon:
+                return direction
+        return None
+    
+    #Throws AmbiguousBranchingPath if any Carbon in the sequence has
+    #more than two connected Carbons
+    def getCarbonsInDirection(self, direction, ignoreDirection=None):
+        chain = [self]
+        if direction:
+            nextCarbon = getattr(self, direction)
+            if nextCarbon:
+                opposingDirection = Carbon.getOpposingDirection(direction)
+                chain.extend(nextCarbon.getCarbonsInDirection(direction=None, ignoreDirection=opposingDirection))
+        else:
+            #To check for branching paths 
+            hasChain = False
+            for dir in Carbon.directions():
+                if dir == ignoreDirection:
+                    continue
+                nextCarbon = getattr(self, dir) 
+                if nextCarbon:
+                    #If we find a second chain, raise an error. The chain would be ambiguous.
+                    if hasChain:
+                        raise BranchingCarbonChainError()
+                    opposingDirection = Carbon.getOpposingDirection(direction)
+                    #Search for more Carbons and add them to our list
+                    chain.extend(nextCarbon.getCarbonsInDirection(direction=None, ignoreDirection=opposingDirection))
+                    hasChain=True
+        return chain
+            

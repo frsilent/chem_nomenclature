@@ -1,4 +1,9 @@
-from main import *
+from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QImage
+from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
+
+from alkane import Alkane
+
 class DrawView(QtGui.QGraphicsView):
     def __init__(self,parent):
         QtGui.QWidget.__init__(self,parent)
@@ -26,7 +31,6 @@ class DrawView(QtGui.QGraphicsView):
         #Load and resize image to fit squarely in the grid
         self.carbonImage = QtGui.QPixmap('carbon.png').scaled(self.col_width, self.row_height)
         self.addGridToScene()
-        print(self.scene.width(), self.scene.height())
         
     def addGridToScene(self):
         #Set up pen
@@ -34,13 +38,9 @@ class DrawView(QtGui.QGraphicsView):
         #Draw Horizontal Lines
         for y in range(0, self.num_rows-1): # don't draw the two outside edge lines
             self.scene.addLine(0, (y+1)*self.row_height, self.width, (y+1)*self.row_height, pen)
-            if y == self.num_rows-2:
-                print((y+1)*self.row_height)
         #Draw Vertical Lines
         for x in range(0, self.num_cols-1): # don't draw the two outside edge lines
             self.scene.addLine((x+1)*self.col_width, 0, (x+1)*self.col_width, self.height, pen)
-            if x == self.num_cols-2:
-                print((x+1)*self.col_width)
             
     def drawCarbons(self, qp):
         for row in range(0, self.num_rows):

@@ -3,7 +3,8 @@ __author__ = 'rheintze'
 #from chemspipy import *
 #from cactusAPI import get_csid
 from carbon import Carbon
-from exceptions import *
+from substituent import Substituent
+from custom_exceptions import *
 class Alkane:
     """
     A class used to implement an organic compound.
@@ -24,9 +25,23 @@ class Alkane:
             raise AlkaneNotConnectedError()
         if hasCycles:
             raise CyclicAlkaneError()
-        self.longestChain = self.getLongestChain()
-        self.head = longestChain[0]
-        self.substituents = self._getSubstituents()
+#        self.longestChain = self.getLongestChain()
+#        #Reset head to first element in longest chain. This is the cannonical head.
+#        self.head = self.longestChain[0]
+#        try:
+#            self.substituents = self._getSubstituents()
+#        except BranchingCarbonChainError as error:
+#            raise error
+
+    #Throws BranchingCarbonChainError for malformed substituents
+    def _getSubstituents(self):
+        subs = []
+        for i in range(len(self.longestChain)):
+            try:
+                subs.extend(Substituent.getSubsituentsAt(self.longestChain, i))
+            except BranchingCarbonChainError as error:
+                raise error
+        return subs        
     
     #Initialize graph and carbon list based on carbon matrix    
     def initGraph(self, graphicMatrix):
@@ -43,14 +58,14 @@ class Alkane:
                 thisCarbon = Carbon()
                 self.carbons.append(thisCarbon)
                 #Remember that this carbon is at this location for when we make our double-links
-                carbonDict[(row_index, col_index)] = thisCarbon
+                carbonDict[(col_index, row_index)] = thisCarbon
                 otherCarbon = None
                 #Have we found our first carbon? 
                 if self.head == None:
                     self.head = thisCarbon
                 
                 #Is there a valid, occupied space to the left?
-                if col_index>0 and graphicMatrix[col_index-1][row_index]:
+                if col_index-1>0 and graphicMatrix[col_index-1][row_index]:
                     #Remember which carbon was in this space
                     otherCarbon = carbonDict[(col_index-1,row_index)]
                     #Create double-link between our Carbon nodes
@@ -58,7 +73,7 @@ class Alkane:
                     otherCarbon.east = thisCarbon
                         
                 #Is there a valid, occupied space to the top?
-                if row_index and graphicMatrix[col_index][row_index-1]:
+                if row_index-1>0 and graphicMatrix[col_index][row_index-1]:
                     #Remember which carbon was in this space
                     otherCarbon = carbonDict[(col_index,row_index-1)]
                     #Create double-link between our Carbon nodes
@@ -72,11 +87,11 @@ class Alkane:
         hasCycles = False
         totalSet = set(self.carbons)
         try:
-            connectedSet = self._getConnectedCarbonSet()
-        except CyclicAlkeneError:
+            connectedSet = self.head.getConnectedSet()
+        except CyclicAlkaneError:
             hasCycles = True
         if totalSet != connectedSet:
-            isConnected = false
+            isConnected = False
         return (isConnected, hasCycles)
     
     
@@ -85,13 +100,6 @@ class Alkane:
         for carbon in self.carbons:
             chains.append(carbon.getLongestChain())
         return max(chains, key=len)
-
-
-    def getSubstituents(self):
-        for carbon in self.carbons:
-            #Is this Carbon the head of a substituent?
-            if carbon.getNumberOfBonds() ==1 and carbon not in self.longestChain:
-                
                 
          
 #    def __init__(self, query):  #query will generally be in smiles or inchi
