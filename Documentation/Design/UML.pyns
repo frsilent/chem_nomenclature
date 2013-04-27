@@ -1,0 +1,77 @@
+# PynSource Version 1.1
+{'type':'meta', 'info1':'Lorem ipsum dolor sit amet, consectetur adipiscing elit is latin.'}
+{'type':'umlshape', 'id':'Alkane', 'x':425, 'y':1223, 'width':170, 'height':205, 'attrs':'chain|substituent|carbons|head', 'meths':'__init__|_getSubstituents|initGraph|isConnectedHasCycles|getLongestChain'}
+{'type':'umlshape', 'id':'TestAlkane', 'x':347, 'y':10, 'width':120, 'height':125, 'attrs':'test_int|test_string', 'meths':'setUp|test_alkane'}
+{'type':'umlshape', 'id':'unittest.TestCase', 'x':337, 'y':265, 'width':197, 'height':31, 'attrs':'', 'meths':''}
+{'type':'umlshape', 'id':'Carbon', 'x':10, 'y':46, 'width':178, 'height':237, 'attrs':'north', 'meths':'directions|getOpposingDirection|__init__|getLongestChain|_getLongestChain|getConnectedSet|getConnectedSet|getNumberOfBonds|getDirectionTo|getCarbonsInDirection'}
+{'type':'umlshape', 'id':'TestCarbon', 'x':604, 'y':10, 'width':218, 'height':141, 'attrs':'test_int|test_string', 'meths':'setUp|test_carbon|test_getCarbonsInDirection'}
+{'type':'umlshape', 'id':'Compound', 'x':49, 'y':882, 'width':202, 'height':637, 'attrs':'csid|_imageurl|_mf|_smiles|_inchi|_inchikey|_averagemass|_molecularweight|_monoisotopicmass|_nominalmass|_alogp|_xlogp|_commonname|_image|_mol|_mol3d|_iupac', 'meths':'__init__|__repr__|imageurl|mf|smiles|inchi|inchikey|averagemass|molecularweight|monoisotopicmass|nominalmass|alogp|xlogp|commonname|iupac|loadextendedcompoundinfo|image|mol|mol3d'}
+{'type':'umlshape', 'id':'object', 'x':312, 'y':1075, 'width':76, 'height':31, 'attrs':'', 'meths':''}
+{'type':'umlshape', 'id':'TestChemSpiPy', 'x':10, 'y':422, 'width':178, 'height':333, 'attrs':'test_int|test_string|test_imageurl|test_mf|test_smiles|test_inchi|test_inchikey|test_averagemass|test_molecularweight|test_monoisotopicmass|test_nominalmass|test_alogp|test_xlogp|test_commonname', 'meths':'setUp|test_compound|test_find'}
+{'type':'umlshape', 'id':'DrawView', 'x':298, 'y':1436, 'width':130, 'height':333, 'attrs':'width|height|num_rows|num_cols|col_width|row_height|carbonMatrix|scene|carbonImage', 'meths':'__init__|addGridToScene|drawCarbons|mousePressEvent|screenToLogical|logicalToScreen|clearCarbons|getCarbonMatrix'}
+{'type':'umlshape', 'id':'QtGui.QGraphicsView', 'x':627, 'y':1470, 'width':219, 'height':31, 'attrs':'', 'meths':''}
+{'type':'umlshape', 'id':'StartQT4', 'x':709, 'y':1259, 'width':98, 'height':173, 'attrs':'ui|view|molecule', 'meths':'__init__|validate|generate|makeCarbon'}
+{'type':'umlshape', 'id':'QtGui.QMainWindow', 'x':642, 'y':1085, 'width':197, 'height':31, 'attrs':'', 'meths':''}
+{'type':'umlshape', 'id':'Ui_MainWindow', 'x':442, 'y':990, 'width':153, 'height':31, 'attrs':'', 'meths':''}
+{'type':'umlshape', 'id':'Substituent', 'x':296, 'y':633, 'width':138, 'height':141, 'attrs':'head|carbons|index', 'meths':'__init__|getSubsituentsAt'}
+{'type':'umlshape', 'id':'TestSubstituent', 'x':347, 'y':422, 'width':175, 'height':125, 'attrs':'test_int|test_string', 'meths':'setUp|test_substituent'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'DrawView_to_QtGui.QGraphicsView', 'source':'DrawView', 'target':'QtGui.QGraphicsView', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'DrawView_to_QtGui.QGraphicsView', 'source':'DrawView', 'target':'QtGui.QGraphicsView', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'StartQT4_to_QtGui.QMainWindow', 'source':'StartQT4', 'target':'QtGui.QMainWindow', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Ui_MainWindow_to_StartQT4', 'source':'Ui_MainWindow', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'DrawView_to_StartQT4', 'source':'DrawView', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'Alkane_to_StartQT4', 'source':'Alkane', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'DrawView_to_QtGui.QGraphicsView', 'source':'DrawView', 'target':'QtGui.QGraphicsView', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'StartQT4_to_QtGui.QMainWindow', 'source':'StartQT4', 'target':'QtGui.QMainWindow', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Ui_MainWindow_to_StartQT4', 'source':'Ui_MainWindow', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'DrawView_to_StartQT4', 'source':'DrawView', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'Alkane_to_StartQT4', 'source':'Alkane', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'DrawView_to_QtGui.QGraphicsView', 'source':'DrawView', 'target':'QtGui.QGraphicsView', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'StartQT4_to_QtGui.QMainWindow', 'source':'StartQT4', 'target':'QtGui.QMainWindow', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestSubstituent_to_unittest.TestCase', 'source':'TestSubstituent', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Ui_MainWindow_to_StartQT4', 'source':'Ui_MainWindow', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'DrawView_to_StartQT4', 'source':'DrawView', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'Alkane_to_StartQT4', 'source':'Alkane', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'TestAlkane_to_unittest.TestCase', 'source':'TestAlkane', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestCarbon_to_unittest.TestCase', 'source':'TestCarbon', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Compound_to_object', 'source':'Compound', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestChemSpiPy_to_unittest.TestCase', 'source':'TestChemSpiPy', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'DrawView_to_QtGui.QGraphicsView', 'source':'DrawView', 'target':'QtGui.QGraphicsView', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'StartQT4_to_QtGui.QMainWindow', 'source':'StartQT4', 'target':'QtGui.QMainWindow', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'TestSubstituent_to_unittest.TestCase', 'source':'TestSubstituent', 'target':'unittest.TestCase', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Ui_MainWindow_to_object', 'source':'Ui_MainWindow', 'target':'object', 'uml_edge_type':'generalisation'}
+{'type':'edge', 'id':'Ui_MainWindow_to_StartQT4', 'source':'Ui_MainWindow', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'DrawView_to_StartQT4', 'source':'DrawView', 'target':'StartQT4', 'uml_edge_type':'composition'}
+{'type':'edge', 'id':'Alkane_to_StartQT4', 'source':'Alkane', 'target':'StartQT4', 'uml_edge_type':'composition'}
