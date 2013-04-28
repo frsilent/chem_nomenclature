@@ -51,6 +51,8 @@ Use PowerPoint slides for your demonstration!  Save questions for the end - tell
 Links to Google Docs (will compile and format in word when completed):
 List of items to complete before sunday afternoon: https://docs.google.com/document/d/1NfprKSHOsxZ69iSIzPmBEtA1n16MSJYqLrU-S1wM1qw/edit
 
+Intro and post mortem paragraphs: https://docs.google.com/document/d/1d1bOAMZ2Xd1Tb7OUdUdYSBHLBAeu3x1DFxImR9J0D3M/edit
+
 SQA plan: https://docs.google.com/document/d/1qXDjXeBg2YYmiUreveK6jMlg4MHjAv8M58GV0qRia1g/edit
 
 Feasibility: https://docs.google.com/document/d/1wbH-LAosgAiB9ODlVUW0CLjuUH1BArTs1o6cq7aYXUQ/edit
