@@ -4,6 +4,7 @@ class Carbon:
     """
     A class used to represent a carbon in an alkane molecule
     """
+
     #Ordered such that directions[i] opposes directions[3-i]
     @staticmethod
     def directions():
@@ -14,9 +15,11 @@ class Carbon:
         
     def __init__(self):
         self.north = self.south = self.east = self.west = None
-    
+        self.visited = False #access flag; used for longestChain
+        self.carbonSet = set()
+
     def getLongestChain(self):
-        return self._getLongestChain()            
+        return self._getLongestChain()
     
     def _getLongestChain(self, ignoreDirection=None):
         #Append this carbon to the chain
@@ -38,12 +41,12 @@ class Carbon:
     def getConnectedSet(self):
         return self._getConnectedCarbonSet()
     
-    #Helper recursive method for isConnectedHasCycles    
+    #Helper recursive method for isConnectedHasCycles
     def getConnectedSet(self, carbonSet=set(), ignoreDirection=None):
-        #Ordered such that directions[i] opposes directions[3-i] 
+        #Ordered such that directions[i] opposes directions[3-i]
         directions = ('north', 'east', 'west', 'south')
         if self in carbonSet:
-            raise CyclicAlkeneError()
+            raise CyclicAlkaneError()
         else:
             carbonSet.add(self)
         for dir in directions:
@@ -54,7 +57,7 @@ class Carbon:
                 opposingDirection = Carbon.getOpposingDirection(dir)
                 nextCarbon.getConnectedSet(carbonSet, opposingDirection)
         return carbonSet
-    
+
     def getNumberOfBonds(self):
         num = 0
         for dir in Carbon.directions():

@@ -19,30 +19,26 @@ class StartQT4(QtGui.QMainWindow):
         self.molecule = None
 
         #function bindings
-        QtCore.QObject.connect(self.ui.generateButton,QtCore.SIGNAL("clicked()"),self.generate)
         QtCore.QObject.connect(self.ui.validateButton,QtCore.SIGNAL("clicked()"),self.validate)
-        QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.view.clearCarbons)
+        QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.clearMolecule)
+        QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.view.makeRandom)
 
     def validate(self):
         carbonMatrix = self.view.getCarbonMatrix()
         try:
             self.molecule = Alkane(carbonMatrix)
-            for carbonList in carbonMatrix:
-                print(carbonList)
-            print()
         except Exception as error:
             print("Validation Error:")
             print(error)
             print(error.__class__)
             exc_type, exc_value, exc_traceback = sys.exc_info()
             traceback.print_tb(exc_traceback, limit=100, file=sys.stdout)
-    
-    def generate(self):
-        pass
 
-    def makeCarbon(self):
-        pass
-
+    def clearMolecule(self):
+        self.view.clearCarbons()
+        for carbon in self.molecule.carbons:
+            carbon = None
+        self.molecule = None
 
 if __name__ == '__main__':
     import sys

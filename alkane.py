@@ -15,7 +15,7 @@ class Alkane:
     substituent = ('methyl','ethyl','propyl','butyl','pentyl')
 
     def __init__(self, matrix):
-        self.carbons = []
+        self.carbons = [] #list of all nodes (carbons) in the graph (molecule)
         self.head = None
         self.initGraph(matrix)
         if self.head == None:
@@ -25,7 +25,8 @@ class Alkane:
             raise AlkaneNotConnectedError()
         if hasCycles:
             raise CyclicAlkaneError()
-#        self.longestChain = self.getLongestChain()
+        self.longestChain = self.getLongestChain()
+        self.name = self.getName()
 #        #Reset head to first element in longest chain. This is the cannonical head.
 #        self.head = self.longestChain[0]
 #        try:
@@ -41,9 +42,9 @@ class Alkane:
                 subs.extend(Substituent.getSubsituentsAt(self.longestChain, i))
             except BranchingCarbonChainError as error:
                 raise error
-        return subs        
+        return subs
     
-    #Initialize graph and carbon list based on carbon matrix    
+    #Initialize graph and carbon list based on carbon matrix
     def initGraph(self, graphicMatrix):
         width = len(graphicMatrix)
         height = len(graphicMatrix[0])
@@ -62,6 +63,7 @@ class Alkane:
                 otherCarbon = None
                 #Have we found our first carbon? 
                 if self.head == None:
+                    print("Made new head")
                     self.head = thisCarbon
                 
                 #Is there a valid, occupied space to the left?
@@ -80,7 +82,6 @@ class Alkane:
                     thisCarbon.north = otherCarbon
                     otherCarbon.south = thisCarbon
 
-
     #Check if carbons are connected and graph has no cycles
     def isConnectedHasCycles(self):
         isConnected = True
@@ -91,15 +92,28 @@ class Alkane:
         except CyclicAlkaneError:
             hasCycles = True
         if totalSet != connectedSet:
+            #TODO: Fix this; breaking application on validations after the first
+            print(totalSet) #is right
+            print(connectedSet) #is wrong; is old connectedSet+totalSet
             isConnected = False
         return (isConnected, hasCycles)
-    
     
     def getLongestChain(self):
         chains = []
         for carbon in self.carbons:
             chains.append(carbon.getLongestChain())
-        return max(chains, key=len)
+        #This is ugly but removes the problem of duplicate objects in getLongestChain
+        #For refactoring find a way to only add carbons without visited flag
+        return list(set(max(chains, key=len)))
+
+    def getName(self):
+        name = self.chain[len(self.getLongestChain())-1]
+        print(name)
+
+    def clear(self):
+        pass
+
+
                 
          
 #    def __init__(self, query):  #query will generally be in smiles or inchi
@@ -121,3 +135,4 @@ class Alkane:
 #    print(c.compound_maybe.smiles) #c
 #    print(c.compound_maybe.iupac)
 #    pass
+

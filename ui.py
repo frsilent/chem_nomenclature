@@ -51,9 +51,6 @@ class Ui_MainWindow(object):
         self.checkLabel.setGeometry(QtCore.QRect(510, 50, 101, 31))
         self.checkLabel.setText(_fromUtf8(""))
         self.checkLabel.setObjectName(_fromUtf8("checkLabel"))
-        self.generateButton = QtGui.QPushButton(self.centralwidget)
-        self.generateButton.setGeometry(QtCore.QRect(440, 150, 87, 27))
-        self.generateButton.setObjectName(_fromUtf8("generateButton"))
         self.graphicsView = QtGui.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(20, 200, 600, 300))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
@@ -99,7 +96,6 @@ class Ui_MainWindow(object):
         self.animateButton.setText(QtGui.QApplication.translate("MainWindow", "Animate", None, QtGui.QApplication.UnicodeUTF8))
         self.nomenclatureLabel.setText(QtGui.QApplication.translate("MainWindow", "Nomenclature:", None, QtGui.QApplication.UnicodeUTF8))
         self.checkButton.setText(QtGui.QApplication.translate("MainWindow", "Check!", None, QtGui.QApplication.UnicodeUTF8))
-        self.generateButton.setText(QtGui.QApplication.translate("MainWindow", "Generate", None, QtGui.QApplication.UnicodeUTF8))
         self.clearButton.setText(QtGui.QApplication.translate("MainWindow", "Clear", None, QtGui.QApplication.UnicodeUTF8))
         self.validateButton.setText(QtGui.QApplication.translate("MainWindow", "Validate", None, QtGui.QApplication.UnicodeUTF8))
 

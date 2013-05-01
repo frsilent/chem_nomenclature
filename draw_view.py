@@ -98,6 +98,10 @@ class DrawView(QtGui.QGraphicsView):
         for item in self.scene.items():
             if type(item) is QtGui.QGraphicsPixmapItem:
                 self.scene.removeItem(item)
-    
+
     def getCarbonMatrix(self):
         return self.carbonMatrix
+
+    def makeRandom(self):
+        #Make a random carbonMatrix
+        pass
