@@ -21,6 +21,8 @@ class StartQT4(QtGui.QMainWindow):
         #function bindings
         QtCore.QObject.connect(self.ui.validateButton,QtCore.SIGNAL("clicked()"),self.validate)
         QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.clearMolecule)
+        QtCore.QObject.connect(self.ui.checkButton,QtCore.SIGNAL("clicked()"),self.checkGuess)
+        QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.view.animate)
         QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.view.makeRandom)
 
     def validate(self):
@@ -39,6 +41,21 @@ class StartQT4(QtGui.QMainWindow):
         for carbon in self.molecule.carbons:
             del carbon
         self.molecule = None
+
+    def checkGuess(self):
+        try:
+            self.ui.guessResultLabel.setVisible(True)
+            self.molecule.verify(self.ui.nomenclatureBox.toPlainText)
+            if self.molecule.verify(self.ui.nomenclatureBox.toPlainText):
+                self.ui.guessResultLabel.setText("Correct!")
+            else:
+                self.ui.guessResultLabel.setText("Incorrect")
+        except Exception as error:
+            print("Guess not made or molecule does not exist")
+            print(error)
+            print(error.__class__)
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_tb(exc_traceback, limit=100, file=sys.stdout)
 
 if __name__ == '__main__':
     import sys

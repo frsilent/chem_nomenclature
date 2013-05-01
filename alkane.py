@@ -105,6 +105,9 @@ class Alkane:
     def getName(self):
         basename = self.chain[len(self.getLongestChain())-1]
 
+    def verify(self,guess):
+        return guess == self.getName()
+
 #    def __init__(self, query):  #query will generally be in smiles or inchi
 #        self.query = query
 #        self.compound_maybe = Compound(get_csid(query))  #uses cactus search to find csid & constructs compound with it

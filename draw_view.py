@@ -105,3 +105,7 @@ class DrawView(QtGui.QGraphicsView):
     def makeRandom(self):
         #Make a random carbonMatrix
         pass
+
+    def animate(self):
+        #Start the show
+        pass
