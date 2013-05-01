@@ -35,15 +35,7 @@ class Alkane:
 #            raise error
 
     #Throws BranchingCarbonChainError for malformed substituents
-    def _getSubstituents(self):
-        subs = []
-        for i in range(len(self.longestChain)):
-            try:
-                subs.extend(Substituent.getSubsituentsAt(self.longestChain, i))
-            except BranchingCarbonChainError as error:
-                raise error
-        return subs
-    
+
     #Initialize graph and carbon list based on carbon matrix
     def initGraph(self, graphicMatrix):
         width = len(graphicMatrix)
@@ -63,7 +55,6 @@ class Alkane:
                 otherCarbon = None
                 #Have we found our first carbon? 
                 if self.head == None:
-                    print("Made new head")
                     self.head = thisCarbon
                 
                 #Is there a valid, occupied space to the left?
@@ -93,8 +84,8 @@ class Alkane:
             hasCycles = True
         if totalSet != connectedSet:
             #TODO: Fix this; breaking application on validations after the first
-            print(totalSet) #is right
-            print(connectedSet) #is wrong; is old connectedSet+totalSet
+            #totalSet is right
+            #connectedSet is wrong; is old connectedSet+totalSet
             isConnected = False
         return (isConnected, hasCycles)
     
@@ -106,16 +97,14 @@ class Alkane:
         #For refactoring find a way to only add carbons without visited flag
         return list(set(max(chains, key=len)))
 
+    def getSubstituents(self):
+        substituentCarbons = list(set(self.carbons) - set(self.longestChain)) #create list of carbons-longestchain
+        for c in substituentCarbons: #TODO: Make function which creates a Substituent for each group of sub carbons
+            pass
+
     def getName(self):
-        name = self.chain[len(self.getLongestChain())-1]
-        print(name)
+        basename = self.chain[len(self.getLongestChain())-1]
 
-    def clear(self):
-        pass
-
-
-                
-         
 #    def __init__(self, query):  #query will generally be in smiles or inchi
 #        self.query = query
 #        self.compound_maybe = Compound(get_csid(query))  #uses cactus search to find csid & constructs compound with it

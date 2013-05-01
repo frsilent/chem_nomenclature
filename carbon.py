@@ -16,7 +16,6 @@ class Carbon:
     def __init__(self):
         self.north = self.south = self.east = self.west = None
         self.visited = False #access flag; used for longestChain
-        self.carbonSet = set()
 
     def getLongestChain(self):
         return self._getLongestChain()
@@ -42,6 +41,7 @@ class Carbon:
         return self._getConnectedCarbonSet()
     
     #Helper recursive method for isConnectedHasCycles
+    #TODO: Fix this method to clear the set if carbon is deleted
     def getConnectedSet(self, carbonSet=set(), ignoreDirection=None):
         #Ordered such that directions[i] opposes directions[3-i]
         directions = ('north', 'east', 'west', 'south')

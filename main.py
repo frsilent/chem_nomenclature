@@ -37,7 +37,7 @@ class StartQT4(QtGui.QMainWindow):
     def clearMolecule(self):
         self.view.clearCarbons()
         for carbon in self.molecule.carbons:
-            carbon = None
+            del carbon
         self.molecule = None
 
 if __name__ == '__main__':
