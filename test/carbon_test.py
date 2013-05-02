@@ -32,7 +32,7 @@ class TestCarbon(unittest.TestCase):
         self.assertEqual(1, carbon.x, "X was wrong!")
         self.assertEqual(2, carbon.y, "Y was wrong!")
         for direction in Carbon.directions():
-            self.assertEqual(getattr(carbon, direction), None, "Direciton: "+direction+" was not None!")
+            self.assertEqual(getattr(carbon, direction, None), None, "Direciton: "+direction+" was not None!")
 
     def testGetDirectionTo(self):
         left_carbon = Carbon(1, 3)
@@ -152,17 +152,20 @@ class TestCarbon(unittest.TestCase):
                                                    Carbon(3,3),                                                    
         ]
         #Bond the carbons together
-        
+        Carbon.bondCarbons(carbons)
         #Mapping of params to method (index in carbons, direction) to expected result 
         paramsToExpected = {
             (carbons[4], 'west') : [carbons[3]],
             (carbons[4], 'north') : [carbons[2],carbons[1],carbons[0]],
              
         }
-        for (carbon,direction), expected in paramsToExpected:
-            actual = carbon.getCarbonsInDirection(direction)
+        for inputTuple, expected in paramsToExpected.items():
+            actual = inputTuple[0].getCarbonsInDirection(inputTuple[1])
             if actual != expected:
-                message = "Carbons didn't match!\n  Actual:\n"
+                message = "Carbons didn't match!\n"
+                message += "First Carbon: %s\n" % str(inputTuple[0])
+                message += "Direction: %s\n" % inputTuple[1]
+                message += "  Actual:\n"
                 for act in actual:
                     message += str(act)+"\n"
                 message += "  Expected:\n"
@@ -171,8 +174,62 @@ class TestCarbon(unittest.TestCase):
                 self.fail(message)
         
         self.assertRaises(BranchingCarbonChainError, carbons[0].getCarbonsInDirection, 'east')
+        self.assertEqual(carbons[4].getCarbonsInDirection('south'), [], "Returned non-empty list when called in empty direction!")
+        
+    
+    def testGetConnectedSet(self):
+        #A connected map with no cycles 
+        #0 1
+        #  2   
+        #3 4 5 
+        #    6
+        validMap = [
+            Carbon(0,0), Carbon(1,0),
+                         Carbon(1,1),              
+            Carbon(0,2), Carbon(1,2), Carbon(2,2), 
+                                      Carbon(2,3),                                                    
+        ]
+        #Bond the carbons together
+        Carbon.bondCarbons(validMap)
+        self.attemptConnectedSet(validMap, "validMap", False)
+        
+        #A connected map with a cycle with a hole in the middle 
+        #0 1 2
+        #3   4  
+        #5 6 7
+        looseCycledMap = [
+            Carbon(0,0), Carbon(1,0), Carbon(2,0),
+            Carbon(0,1),              Carbon(2,1),              
+            Carbon(0,2), Carbon(1,2), Carbon(2,2),    
+        ] 
+        self.attemptConnectedSet(looseCycledMap, "looseCycledMap", True)
+        
+        #A connected map with tight cycle
+        #0 1 2
+        #3 4
+        tightCycledMap = [
+            Carbon(0,0), Carbon(1,0), Carbon(2,0),
+            Carbon(0,1), Carbon(1,1),
+        ] 
+        self.attemptConnectedSet(tightCycledMap, "tightCycledMap", True)
+
         
         
+    def attemptConnectedSet(self, carbonList, name, shouldFail):
+        #Bond the carbons together
+        Carbon.bondCarbons(carbonList)
+        failed=False
+        try:
+            for c in carbonList:
+                c.getConnectedSet()
+            failed=False
+        except:
+            failed=True
+        if shouldFail and not failed:
+            self.fail("Carbon list named %s should have failed, but didn't" % name)
+        elif not shouldFail and failed:
+            self.fail("Carbon list named %s shouldn't failed, but did" % name)
+         
         
 if __name__ == '__main__':
     unittest.main()

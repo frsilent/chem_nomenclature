@@ -35,10 +35,10 @@ class Carbon:
 
 
     def __str__(self):
-        result = super(self).__str__()
-        result += "\nX: %d Y: %d\n" % self.x, self.y
+        result = super().__str__()
+        result += "\nX: %d Y: %d\n" % (self.x, self.y)
         for direction in Carbon.directions():
-            result += " "+direction+": %s\n" % "yes" if self.north else "no"
+            result += " "+direction+": %s\n" % ("yes " if getattr(self, direction, None) else "no ")
         return result
         
     def getLongestChain(self):
@@ -52,9 +52,9 @@ class Carbon:
         for direction in Carbon.directions():
             if direction == ignoreDirection:
                 continue
-            if getattr(self, direction):
-                opposingDirection = Carbon.getOpposingDirection(direction)
-                nextCarbon = getattr(self, direction)
+            if getattr(self, direction, None):
+                opposingDirection = Carbon._getOpposingDirection(direction)
+                nextCarbon = getattr(self, direction, None)
                 validChains.append(nextCarbon._getLongestChain(opposingDirection))
             if any(validChains):
                 #Extend our chain with the longest chain we found
@@ -62,11 +62,13 @@ class Carbon:
         return chain
     
     def getConnectedSet(self):
-        return self._getConnectedCarbonSet()
+        return self._getConnectedSet(carbonSet = None)
     
     #Helper recursive method for isConnectedHasCycles
     #TODO: Fix this method to clear the set if carbon is deleted
-    def _getConnectedSet(self, carbonSet=set(), ignoreDirection=None):
+    def _getConnectedSet(self, carbonSet, ignoreDirection=None):
+        if not carbonSet:
+            carbonSet = set()
         if self in carbonSet:
             raise CyclicAlkaneError()
         else:
@@ -74,25 +76,30 @@ class Carbon:
         for direction in Carbon.directions():
             if direction == ignoreDirection:
                 continue
-            nextCarbon = getattr(self, direction)
+            nextCarbon = getattr(self, direction, None)
             if nextCarbon:
                 opposingDirection = Carbon.getOpposingDirection(direction)
-                nextCarbon.getConnectedSet(carbonSet, opposingDirection)
+                nextCarbon._getConnectedSet(carbonSet, opposingDirection)
         return carbonSet
 
     def getNumberOfBonds(self):
         num = 0
         for direction in Carbon.directions():
-            if getattr(self,direction):
+            if getattr(self,direction, None):
                 num+=1
         return num
 
     def getDirectionTo(self, carbon):
         for direction in Carbon.directions():
-            if getattr(self, direction) == carbon:
+            if getattr(self, direction, None) == carbon:
                 return direction
         return None
+    
+    
     def bondTo(self, other):
+        #Are these carbons the same or in the same position?
+        if self == other or self.x == other.x and self.y == other.y:
+            raise CarbonsNotAdjacentError
         #Are we not on the same column and not on the same row?
         if self.x != other.x and self.y != other.y:
             raise CarbonsNotAdjacentError
@@ -150,20 +157,26 @@ class Carbon:
         chain = [self]
         #Was this the top-level call? 
         if direction:
-            nextCarbon = getattr(self, direction)
+            nextCarbon = getattr(self, direction, None)
             if nextCarbon:
                 opposingDirection = Carbon.getOpposingDirection(direction)
                 #search for more carbons and add them to our chain
-                chain.extend(nextCarbon.getCarbonsInDirection(direction=None, ignoreDirection=opposingDirection))
+                chain.extend(nextCarbon._getCarbonsInDirection(None, ignoreDirection=opposingDirection))
             return chain
         else:
             numBonds = self.getNumberOfBonds()
             #Is our only bond the one we came here on, hence a dead end?
             if numBonds == 1:
-                pass
+                return chain
             #Do we have an extra bond to find more carbons on?
             elif numBonds == 2:
-                pass
+                for direction in Carbon.directions():
+                    if direction == ignoreDirection:
+                        continue
+                    nextCarbon = getattr(self, direction, None) 
+                    if nextCarbon:
+                        opposingDirection = Carbon.getOpposingDirection(direction)
+                        chain.extend(nextCarbon._getCarbonsInDirection(None, opposingDirection))
             #We have too many branches
             else:
                 #So throw an exception
