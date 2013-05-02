@@ -48,16 +48,32 @@ class TestAlkane(unittest.TestCase):
         smallLoopMatrix = [[True,True,True,],[False,True,True,],[False,False,False,],]
         self.assertRaises(CyclicAlkaneError, Alkane, smallLoopMatrix)
         
-        #Valid Carbon matrix #1
-        #T T T
-        #F F F
-        #F F F
-        validMatrixOne = [[True,True,True],[False,False,False],[False,False,False],]
-        try:
-            Alkane(validMatrixOne)
-        except Exception as error:
-            self.fail("Valid Alkane constructor #1 threw Exception\n"+str(error))
-
+        #Malformed substituent Carbon Matrix 
+        #T T T T T T T T T
+        #T F T F T F F F F
+        #T F F T T T F F F
+        malformedSubMatrix = [
+            [True, True, True, True, True, True, True, True, True,],
+            [True, False, True, False, True, False, False, False, False,],
+            [True, False, False, True, True, True, False, False, False,],
+        ]
+        self.assertRaises(BranchingCarbonChainError, Alkane, malformedSubMatrix)
+        
+        #Typical valid Carbon Matrix 
+        #F F T F F F T F F
+        #T T T T T T T T T
+        #T F T F T F F F F
+        #T F F F T T F F F
+        typicalValidMatrix = [
+            [False, False, True, False, False, False, True, False, False,],
+            [True, True, True, True, True, True, True, True, True,],
+            [True, False, True, False, True, False, False, False, False,],
+            [True, False, False, False, True, True, False, False, False,],
+        ]
+        
+        
+        
+        
 
 if __name__ == '__main__':
     unittest.main()
