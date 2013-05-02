@@ -1,7 +1,7 @@
 from PyQt4 import QtCore, QtGui
 
 class CarbonView(QtGui.QGraphicsView):
-    def __init__(self,parent):
+    def __init__(self, parent):
         QtGui.QWidget.__init__(self,parent)
         self.width = 600
         self.height = 300

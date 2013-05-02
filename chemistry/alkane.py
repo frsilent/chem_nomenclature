@@ -16,10 +16,10 @@ class Alkane:
     
     MAX_CHAIN_LENGTH = len(chain)
     MAX_SUB_LENGTH = 4    
-    def __init__(self, longestChain):
-        self.carbons = longestChain[:]
-        self.longestChain = longestChain
-        self.head = longestChain[0]
+#    def __init__(self, longestChain):
+#        self.carbons = longestChain[:]
+#        self.longestChain = longestChain
+#        self.head = longestChain[0]
 
 
     def __init__(self, matrix):
@@ -33,8 +33,8 @@ class Alkane:
             raise AlkaneNotConnectedError()
         if hasCycles:
             raise CyclicAlkaneError()
-        self.longestChain = self.getLongestChain()
-        self.name = self.getName()
+#        self.longestChain = self.getLongestChain()
+#        self.name = self.getName()
 #        #Reset head to first element in longest chain. This is the cannonical head.
 #        self.head = self.longestChain[0]
 #        try:
@@ -118,28 +118,28 @@ class Alkane:
         return self.carbons
     
 
-    def createRandomAlkane(self):
-        chain_length = random.randInt(6,Alkane.MAX_CHAIN_LENGTH)
-        max_sub_length = Alkane.MAX_CHAIN_LENGTH-chain_length
-        carbons = []
-        y = 5
-        for i in range(chain_length):
-            carbons.append(Carbon(2+i, y))
-        alkane = Alkane(carbons)
-        for i in range(chain_length):
-            if not random.randInt(0,y-1):
-                max_sub_length = max(0, min(i+1, chain_length-i)-2)
-                sub_chain = []
-                upNotDown = random.getrandbits(1)
-                for s in range(max_sub_length):
-                    newCarbon = None
-                    if upNotDown:
-                        newCarbon = Carbon(x, y+s+1)
-                    else:
-                        newCarbon = Carbon(x, y-s-1)
-                    sub_chain.append(Carbon)
-                alkane.addSubstituent(Substituent(sub_chain))
-                alkane.carbons.extend(sub_chain)
+#    def createRandomAlkane(self):
+#        chain_length = random.randInt(6,Alkane.MAX_CHAIN_LENGTH)
+#        max_sub_length = Alkane.MAX_CHAIN_LENGTH-chain_length
+#        carbons = []
+#        y = 5
+#        for i in range(chain_length):
+#            carbons.append(Carbon(2+i, y))
+#        alkane = Alkane(carbons)
+#        for i in range(chain_length):
+#            if not random.randInt(0,y-1):
+#                max_sub_length = max(0, min(i+1, chain_length-i)-2)
+#                sub_chain = []
+#                upNotDown = random.getrandbits(1)
+#                for s in range(max_sub_length):
+#                    newCarbon = None
+#                    if upNotDown:
+#                        newCarbon = Carbon(x, y+s+1)
+#                    else:
+#                        newCarbon = Carbon(x, y-s-1)
+#                    sub_chain.append(Carbon)
+#                alkane.addSubstituent(Substituent(sub_chain))
+#                alkane.carbons.extend(sub_chain)
                 
 
 #    def __init__(self, query):  #query will generally be in smiles or inchi
