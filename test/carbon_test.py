@@ -8,7 +8,7 @@ Unit tests for carbon.py
 
 import unittest
 
-from carbon import *
+from chemistry.carbon import *
 
 class TestCarbon(unittest.TestCase):
     def setUp(self):

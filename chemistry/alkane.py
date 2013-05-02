@@ -2,9 +2,9 @@ __author__ = 'rheintze'
 
 #from chemspipy import *
 #from cactusAPI import get_csid
-from carbon import Carbon
-from substituent import Substituent
-from custom_exceptions import *
+from chemistry.carbon import Carbon
+from chemistry.substituent import Substituent
+from chemistry.chem_exceptions import *
 class Alkane:
     """
     A class used to implement an organic compound.
@@ -13,6 +13,14 @@ class Alkane:
     chain = ('methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane',
              'undecane','dodecane','tridecane','tetradecane','pentadecane')
     substituent = ('methyl','ethyl','propyl','butyl','pentyl')
+    
+    MAX_CHAIN_LENGTH = len(chain)
+    MAX_SUB_LENGTH = 4    
+    def __init__(self, longestChain):
+        self.carbons = longestChain[:]
+        self.longestChain = longestChain
+        self.head = longestChain[0]
+
 
     def __init__(self, matrix):
         self.carbons = [] #list of all nodes (carbons) in the graph (molecule)
@@ -48,7 +56,7 @@ class Alkane:
                 #Skip empty spaces
                 if not graphicMatrix[col_index][row_index]:
                     continue
-                thisCarbon = Carbon()
+                thisCarbon = Carbon(col_index, row_index)
                 self.carbons.append(thisCarbon)
                 #Remember that this carbon is at this location for when we make our double-links
                 carbonDict[(col_index, row_index)] = thisCarbon
@@ -77,15 +85,13 @@ class Alkane:
     def isConnectedHasCycles(self):
         isConnected = True
         hasCycles = False
+        connectedSet = None
         totalSet = set(self.carbons)
         try:
             connectedSet = self.head.getConnectedSet()
         except CyclicAlkaneError:
             hasCycles = True
         if totalSet != connectedSet:
-            #TODO: Fix this; breaking application on validations after the first
-            #totalSet is right
-            #connectedSet is wrong; is old connectedSet+totalSet
             isConnected = False
         return (isConnected, hasCycles)
     
@@ -107,6 +113,34 @@ class Alkane:
 
     def verify(self,guess):
         return guess == self.getName()
+    
+    def getCarbons(self):
+        return self.carbons
+    
+
+    def createRandomAlkane(self):
+        chain_length = random.randInt(6,Alkane.MAX_CHAIN_LENGTH)
+        max_sub_length = Alkane.MAX_CHAIN_LENGTH-chain_length
+        carbons = []
+        y = 5
+        for i in range(chain_length):
+            carbons.append(Carbon(2+i, y))
+        alkane = Alkane(carbons)
+        for i in range(chain_length):
+            if not random.randInt(0,y-1):
+                max_sub_length = max(0, min(i+1, chain_length-i)-2)
+                sub_chain = []
+                upNotDown = random.getrandbits(1)
+                for s in range(max_sub_length):
+                    newCarbon = None
+                    if upNotDown:
+                        newCarbon = Carbon(x, y+s+1)
+                    else:
+                        newCarbon = Carbon(x, y-s-1)
+                    sub_chain.append(Carbon)
+                alkane.addSubstituent(Substituent(sub_chain))
+                alkane.carbons.extend(sub_chain)
+                
 
 #    def __init__(self, query):  #query will generally be in smiles or inchi
 #        self.query = query
