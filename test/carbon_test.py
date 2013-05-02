@@ -14,7 +14,7 @@ class TestCarbon(unittest.TestCase):
     def setUp(self):
         pass
        
-    def testGetOpposingDirections(self):
+    def testGetOpposingDirection(self):
         self.assertEqual('north', Carbon.getOpposingDirection('south'), "The opposite of south was not north!")
         self.assertEqual('south', Carbon.getOpposingDirection('north'), "The opposite of north was not south!")
         self.assertEqual('east', Carbon.getOpposingDirection('west'), "The opposite of east was not west!")
@@ -212,8 +212,6 @@ class TestCarbon(unittest.TestCase):
             Carbon(0,1), Carbon(1,1),
         ] 
         self.attemptConnectedSet(tightCycledMap, "tightCycledMap", True)
-
-        
         
     def attemptConnectedSet(self, carbonList, name, shouldFail):
         #Bond the carbons together
@@ -229,6 +227,47 @@ class TestCarbon(unittest.TestCase):
             self.fail("Carbon list named %s should have failed, but didn't" % name)
         elif not shouldFail and failed:
             self.fail("Carbon list named %s shouldn't failed, but did" % name)
+    
+    def testGetLongestChain(self):
+        #A connected map with no cycles 
+        #0 1
+        #  2   
+        #3 4 5 
+        #    6
+        carbons = [
+            Carbon(0,0), Carbon(1,0),
+                         Carbon(1,1),              
+            Carbon(0,2), Carbon(1,2), Carbon(2,2), 
+                                      Carbon(2,3),                                                    
+        ]
+        carbonToExpected = {
+            carbons[0] : [carbons[0], carbons[1], carbons[2], carbons[4], carbons[5], carbons[6],],
+            carbons[1] : [carbons[1], carbons[2], carbons[4], carbons[5], carbons[6],],
+            carbons[2] : [carbons[2], carbons[4], carbons[5], carbons[6],],
+            carbons[3] : [carbons[3], carbons[4], carbons[2], carbons[1], carbons[0],],
+            carbons[4] : [carbons[4], carbons[2], carbons[1], carbons[0],],
+            carbons[5] : [carbons[5], carbons[4], carbons[2], carbons[1], carbons[0],],
+            carbons[6] : [carbons[6], carbons[5], carbons[4], carbons[2], carbons[1], carbons[0],],
+        }
+        Carbon.bondCarbons(carbons)
+        for testCarbon, expected in carbonToExpected.items():
+            actual = testCarbon.getLongestChain()
+            if actual != expected:
+                message = "Carbons didn't match!\n"
+                message += "First Carbon: %s\n" % str(testCarbon)
+                message += "  Actual:\n"
+                for act in actual:
+                    message += str(act)+"\n"
+                message += "  Expected:\n"
+                for exp in expected:
+                    message += str(exp)+"\n"
+                self.fail(message)
+     
+        
+        
+        
+        
+        
          
         
 if __name__ == '__main__':

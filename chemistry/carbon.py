@@ -40,25 +40,28 @@ class Carbon:
         for direction in Carbon.directions():
             result += " "+direction+": %s\n" % ("yes " if getattr(self, direction, None) else "no ")
         return result
-        
+    
+    #Returns longest chain of carbons that includes this carbon,
+    #with this carbon as the first one in the list    
     def getLongestChain(self):
         return self._getLongestChain()
     
+    #Recursive helper method
     def _getLongestChain(self, ignoreDirection=None):
         #Append this carbon to the chain
         chain = [self]
-        #List of directions that have carbons and are not ignoreDirection
+        #List of carbon chains that are valid candidates for longest chain
         validChains = []
         for direction in Carbon.directions():
             if direction == ignoreDirection:
                 continue
-            if getattr(self, direction, None):
-                opposingDirection = Carbon._getOpposingDirection(direction)
-                nextCarbon = getattr(self, direction, None)
-                validChains.append(nextCarbon._getLongestChain(opposingDirection))
-            if any(validChains):
-                #Extend our chain with the longest chain we found
-                chain.extend(max(validChains, key=len))
+            nextCarbon = getattr(self, direction)
+            if nextCarbon:
+                opposingDirection = Carbon.getOpposingDirection(direction)
+                validChains.append(nextCarbon._getLongestChain(ignoreDirection=opposingDirection))
+        if any(validChains):
+            #Extend our chain with the longest chain we found
+            chain.extend(max(validChains, key=len))
         return chain
     
     def getConnectedSet(self):
