@@ -1,10 +1,6 @@
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QImage
-from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
-from alkane import Alkane
-
-class DrawView(QtGui.QGraphicsView):
+class CarbonView(QtGui.QGraphicsView):
     def __init__(self,parent):
         QtGui.QWidget.__init__(self,parent)
         self.width = 600
@@ -29,7 +25,7 @@ class DrawView(QtGui.QGraphicsView):
         self.scene.setSceneRect(0,0,600,300)
 
         #Load and resize image to fit squarely in the grid
-        self.carbonImage = QtGui.QPixmap('carbon.png').scaled(self.col_width, self.row_height)
+        self.carbonImage = QtGui.QPixmap('../data/carbon.png').scaled(self.col_width, self.row_height)
         self.addGridToScene()
         
     def addGridToScene(self):
@@ -48,7 +44,7 @@ class DrawView(QtGui.QGraphicsView):
                 #Is there a carbon at this logical position to draw?
                 if self.carbonMatrix[row][col]:
                     #Get the transformed graphical coordinates
-                    coords = logicalToScreen(self, (row, col))
+                    coords = self.logicalToScreen((row, col))
                     #Draw the carbon image at 
                     qp.drawImage(coords[0], coords[1], self.carbonImage)
     
@@ -88,6 +84,7 @@ class DrawView(QtGui.QGraphicsView):
         return (int(tuple[0]*self.col_width), int(tuple[1]*self.row_height))
     
     def clearCarbons(self):
+        del self.carbonMatrix
         #Reset carbonMatrix to remove logical carbons
         self.carbonMatrix = []
         for col in range(0, self.num_cols):
@@ -101,6 +98,18 @@ class DrawView(QtGui.QGraphicsView):
 
     def getCarbonMatrix(self):
         return self.carbonMatrix
+    
+    def setScreenToAlkane(self, alkane):
+        self.clearCarbons()
+        carbons = alkane.getCarbons()
+        for element in carbons:
+            x = element.x
+            y = element.y
+            self.carbonMatrix[x][y]=self.scene.addPixmap(self.carbonImage)
+            #Get top-left screen coordinates of this square 
+            screen_pos = self.logicalToScreen((x,y))
+            #Add carbon image to screen
+            self.carbonMatrix[x][y].setOffset(*screen_pos)
 
     def makeRandom(self):
         #Make a random carbonMatrix

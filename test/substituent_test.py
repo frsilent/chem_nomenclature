@@ -8,7 +8,7 @@ Unit tests for alkane.py
 
 import unittest
 
-from substituent import *
+from chemistry.substituent import *
 
 class TestSubstituent(unittest.TestCase):
     def setUp(self):

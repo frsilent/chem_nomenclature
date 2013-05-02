@@ -1,4 +1,4 @@
-from custom_exceptions import *
+from chemistry.chem_exceptions import *
 
 class Carbon:
     """
@@ -13,8 +13,10 @@ class Carbon:
     def getOpposingDirection(direction):
         return Carbon.directions()[3-Carbon.directions().index(direction)]
         
-    def __init__(self):
+    def __init__(self, x, y):
         self.north = self.south = self.east = self.west = None
+        self.x = x 
+        self.y = y 
         self.visited = False #access flag; used for longestChain
 
     def getLongestChain(self):
@@ -43,13 +45,11 @@ class Carbon:
     #Helper recursive method for isConnectedHasCycles
     #TODO: Fix this method to clear the set if carbon is deleted
     def getConnectedSet(self, carbonSet=set(), ignoreDirection=None):
-        #Ordered such that directions[i] opposes directions[3-i]
-        directions = ('north', 'east', 'west', 'south')
         if self in carbonSet:
             raise CyclicAlkaneError()
         else:
             carbonSet.add(self)
-        for dir in directions:
+        for dir in Carbon.directions():
             if dir == ignoreDirection:
                 continue
             nextCarbon = getattr(self, dir)

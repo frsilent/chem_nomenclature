@@ -225,9 +225,6 @@
     <property name="enabled">
      <bool>true</bool>
     </property>
-    <property name="visible">
-     <bool>false</bool>
-    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -236,8 +233,24 @@
       <height>17</height>
      </rect>
     </property>
+    <property name="visible">
+     <bool>false</bool>
+    </property>
     <property name="text">
      <string>Correct!/Wrong</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="renderButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>130</y>
+      <width>98</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Render</string>
     </property>
    </widget>
   </widget>
@@ -247,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>635</width>
-     <height>27</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
