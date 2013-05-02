@@ -4,7 +4,6 @@ from PyQt4 import QtCore, QtGui
 from Frame import Frame
 
 class AnimateView(QtGui.QGraphicsView):
-
     def __init__(self,parent):
         QtGui.QWidget.__init__(self,parent)
 
@@ -34,13 +33,19 @@ class AnimateView(QtGui.QGraphicsView):
         self.scene = self.scene()
         self.scene.setSceneRect(0,0,600,300)
 
-        #Load and resize image to fit squarely in the grid
-        self.carbonImage = QtGui.QPixmap('carbon.png').scaled(self.col_width, self.row_height)
-        self.HouseImage = QtGui.QPixmap('house.png').scaled(self.col_width, self.row_height)
-        self.RoadImage = QtGui.QPixmap('road.png').scaled(self.col_width, self.row_height)
+        #Creates next frame; clearing the screen and drawing all carbons again
+        #Need to figure out constructor which will make a clean scene
+        #Alternatively copy frameList & delete all items in it
+        self.frameList.append(Frame(QtGui.QGraphicsScene()))
+        self.advanceFrame()
+
 
     def advanceFrame(self):
         self.index+=1
         self.setScene(self.frameList[self.index])
         self.scene = self.scene()
         self.scene.setSceneRect(0,0,600,300)
+
+    def passAlkane(self,alkane):
+        carbons = alkane.getCarbons()
+        print(carbons)

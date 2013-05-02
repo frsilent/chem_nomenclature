@@ -6,6 +6,7 @@ from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml
 
 from chemistry.alkane import Alkane
 from carbon_view import CarbonView
+from AnimateView import AnimateView
 
 class StartQT4(QtGui.QMainWindow):
 
@@ -21,7 +22,7 @@ class StartQT4(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.validateButton,QtCore.SIGNAL("clicked()"),self.validate)
         QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.clearMolecule)
         QtCore.QObject.connect(self.ui.checkButton,QtCore.SIGNAL("clicked()"),self.checkGuess)
-        QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.view.animate)
+        QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.animate)
         QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.makeRandom)
         QtCore.QObject.connect(self.ui.renderButton,QtCore.SIGNAL("clicked()"),self.renderAlkane)
 
@@ -63,6 +64,10 @@ class StartQT4(QtGui.QMainWindow):
     def makeRandom(self):
         #TODO: Make and display random Alkane
         pass
+
+    def animate(self):
+        self.view = AnimateView(self.ui.graphicsView)
+        self.view.passAlkane(self.molecule)
     
 if __name__ == '__main__':
     import sys
