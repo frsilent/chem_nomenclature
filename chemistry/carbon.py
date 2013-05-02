@@ -9,6 +9,14 @@ class Carbon:
     @staticmethod
     def directions():
         return ('north', 'east', 'west', 'south')
+    
+    @staticmethod
+    def getDirectionsWithout(ignoreDirection):
+        dirs = ['north', 'east', 'west', 'south']
+        if ignoreDirection:
+            dirs.remove(ignoreDirection)
+        return tuple(dirs)
+    
     @staticmethod
     def getOpposingDirection(direction):
         return Carbon.directions()[3-Carbon.directions().index(direction)]
@@ -52,13 +60,11 @@ class Carbon:
         chain = [self]
         #List of carbon chains that are valid candidates for longest chain
         validChains = []
-        for direction in Carbon.directions():
-            if direction == ignoreDirection:
-                continue
+        for direction in Carbon.getDirectionsWithout(ignoreDirection):
             nextCarbon = getattr(self, direction)
             if nextCarbon:
                 opposingDirection = Carbon.getOpposingDirection(direction)
-                validChains.append(nextCarbon._getLongestChain(ignoreDirection=opposingDirection))
+                validChains.append(nextCarbon._getLongestChain(opposingDirection))
         if any(validChains):
             #Extend our chain with the longest chain we found
             chain.extend(max(validChains, key=len))
@@ -76,9 +82,7 @@ class Carbon:
             raise CyclicAlkaneError()
         else:
             carbonSet.add(self)
-        for direction in Carbon.directions():
-            if direction == ignoreDirection:
-                continue
+        for direction in Carbon.getDirectionsWithout(ignoreDirection):
             nextCarbon = getattr(self, direction, None)
             if nextCarbon:
                 opposingDirection = Carbon.getOpposingDirection(direction)
@@ -142,6 +146,7 @@ class Carbon:
                 else:
                     raise CarbonsNotAdjacentError
     
+    #Returns a list of carbons from self outward in direction, not including self
     #Throws AmbiguousBranchingPath if any Carbon in the sequence has
     #more than two connected Carbons        
     def getCarbonsInDirection(self, direction):
@@ -155,6 +160,7 @@ class Carbon:
         #Return the result from the helper method without the first element,
         #which will always equal this
         return result[1:]
+    
     #Recursive helper method that returns chain in direction, plus original carbon
     def _getCarbonsInDirection(self, direction, ignoreDirection=None):
         chain = [self]
@@ -173,9 +179,7 @@ class Carbon:
                 return chain
             #Do we have an extra bond to find more carbons on?
             elif numBonds == 2:
-                for direction in Carbon.directions():
-                    if direction == ignoreDirection:
-                        continue
+                for direction in Carbon.getDirectionsWithout(ignoreDirection):
                     nextCarbon = getattr(self, direction, None) 
                     if nextCarbon:
                         opposingDirection = Carbon.getOpposingDirection(direction)
@@ -185,4 +189,41 @@ class Carbon:
                 #So throw an exception
                 raise BranchingCarbonChainError()
         return chain
+    
+
+    def getDistanceTo(self, target, ignoreDirection=None):
+        count = 1
+        if self == target:
+            return 0
+        else:
+            #List of distance results from recursive calls
+            distances = []
+            for direction in Carbon.getDirectionsWithout(ignoreDirection):
+                nextCarbon = getattr(self, direction)
+                if nextCarbon:
+                    opposingDirection = Carbon.getOpposingDirection(direction)
+                    distance = nextCarbon.getDistanceTo(target, opposingDirection)
+                    if distance > -1:
+                        distances.append(distance)
+            #Did we find our target?
+            if len(distances):
+                #Add the shortest distance to the target to our count
+                count += min(distances)
+            #We didn't find our target
+            else:
+                #So return -1
+                count = -1
+        return count
             
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

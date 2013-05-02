@@ -26,6 +26,15 @@ class TestCarbon(unittest.TestCase):
         self.assertIn('south', directions, "South not in directions!")
         self.assertIn('east', directions, "East not in directions!")
         self.assertIn('west', directions, "West not in directions!")
+        
+    def testGetDirectionsWithout(self):
+        for excludeDir in Carbon.directions():
+            actual = Carbon.getDirectionsWithout(excludeDir)
+            for direction in Carbon.directions():
+                if direction == excludeDir:
+                    self.assertNotIn(direction, actual, "Direction: %s was wrongfully included!" % excludeDir)
+                else:
+                    self.assertIn(direction, actual, "Direction: %s was wrongfully excluded!" % direction)
 
     def testCarbon(self):
         carbon = Carbon(1,2)
@@ -263,12 +272,30 @@ class TestCarbon(unittest.TestCase):
                     message += str(exp)+"\n"
                 self.fail(message)
      
-        
-        
-        
-        
-        
-         
+    def testGetDistanceTo(self):
+        #A connected map with no cycles 
+        #0 
+        #  1   
+        #2 3 4 
+        #    5
+        carbons = [
+            Carbon(0,0),
+                         Carbon(1,1),              
+            Carbon(0,2), Carbon(1,2), Carbon(2,2), 
+                                      Carbon(2,3),                                                    
+        ]
+        Carbon.bondCarbons(carbons)
+        inputsToExpected = {
+            (carbons[5], carbons[0]) : -1,
+            (carbons[5], carbons[1]) : 3,
+            (carbons[5], carbons[2]) : 3,
+            (carbons[5], carbons[3]) : 2,
+            (carbons[5], carbons[4]) : 1,
+            (carbons[5], carbons[5]) : 0,
+        }
+        for inputs, expected in inputsToExpected.items():
+            actual = inputs[0].getDistanceTo(inputs[1])
+            self.assertEqual(expected, actual, "getDistanceTo Failed!\nInitial:"+str(inputs[0])+"\nTarget:\n"+str(inputs[1])+"\nActual:"+str(actual)+"\nExpected:"+str(expected))
         
 if __name__ == '__main__':
     unittest.main()
