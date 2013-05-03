@@ -1,1 +1,11 @@
-A project for the classification of organic compounds
+@Elam, Tim // Heintze, Roland // Lansing, Chris // Giddon, John
+
+A project for the classification of organic compounds.
+------------------------------------------------------------
+In order to run:
+Requires Python 3.3 Interpretter, Qt SDK and PyQt4 modules.
+Python --- http://www.python.org
+Qt     --- http://qt-project.org/
+PyQt4  --- http://www.riverbankcomputing.com/software/pyqt/download
+------------------------------------------------------------
+All modules can be run individually but program entry point is located in ui/main.py
