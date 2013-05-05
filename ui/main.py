@@ -5,8 +5,8 @@ from PyQt4 import QtCore, QtGui
 from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
 from chemistry.alkane import Alkane
-from carbon_view import CarbonView
-from AnimateView import AnimateView
+from ui.carbon_view import CarbonView
+from ui.AnimateView import AnimateView
 
 class StartQT4(QtGui.QMainWindow):
 
