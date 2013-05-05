@@ -5,8 +5,9 @@ from PyQt4 import QtCore, QtGui
 from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
 from chemistry.alkane import Alkane
+from chemistry.chem_exceptions import *
 from carbon_view import CarbonView
-from AnimateView import AnimateView
+from Animation import Animation
 
 class StartQT4(QtGui.QMainWindow):
 
@@ -19,13 +20,15 @@ class StartQT4(QtGui.QMainWindow):
         self.molecule = None
 
         #function bindings
-        QtCore.QObject.connect(self.ui.guessButton,QtCore.SIGNAL("clicked()"),self.validate)
+        QtCore.QObject.connect(self.ui.guessButton,QtCore.SIGNAL("clicked()"),self.guessButton)
         QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.clearMolecule)
-        QtCore.QObject.connect(self.ui.getNameButton,QtCore.SIGNAL("clicked()"),self.checkGuess)
+        QtCore.QObject.connect(self.ui.getNameButton,QtCore.SIGNAL("clicked()"),self.getName)
         QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.animate)
         QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.makeRandom)
+        
+        self.animation = Animation()
 
-    def validate(self):
+    def guessButton(self):
         carbonMatrix = self.view.getCarbonMatrix()
         try:
             self.molecule = Alkane(carbonMatrix)
@@ -37,10 +40,22 @@ class StartQT4(QtGui.QMainWindow):
             traceback.print_tb(exc_traceback, limit=100, file=sys.stdout)
 
     def clearMolecule(self):
-        self.view.clearCarbons()
-        for carbon in self.molecule.carbons:
-            del carbon
-#        self.molecule = None
+        self.view.clearImages()
+        self.molecule = None
+
+    def getName(self):
+        carbonMatrix = self.view.getCarbonMatrix()
+        try:
+            self.molecule = Alkane(carbonMatrix)
+            self.ui.nomenclatureBox.setPlainText(self.molecule.getName())
+        except EmptyAlkaneError:
+            self.ui.nomenclatureBox.setPlainText("Please click in the grid to add carbons")
+        except CyclicAlkaneError:
+            self.ui.nomenclatureBox.setPlainText("The molecule contains a loop or a block.")
+        except BranchingCarbonChainError:
+            self.ui.nomenclatureBox.setPlainText("Only straight-chain substituents are supported.")
+        except AlkaneNotConnectedError:
+            self.ui.nomenclatureBox.setPlainText("Not all of the carbons are connected.")
 
     def checkGuess(self):
         try:
@@ -65,7 +80,7 @@ class StartQT4(QtGui.QMainWindow):
         pass
 
     def animate(self):
-        self.view = AnimateView(self.ui.graphicsView)
+        self.view.clearImages()
         self.view.passAlkane(self.molecule)
     
 if __name__ == '__main__':

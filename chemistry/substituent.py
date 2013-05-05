@@ -15,7 +15,7 @@ class Substituent():
         return "%d-%s" % (self.index, Substituent.NAMES[carbon_length-1])
     
     def getAlphaName(self):
-        return Substituent.names[len(self.carbons)-1]
+        return Substituent.NAMES[len(self.carbons)-1]
     
     #Return the first carbon in the sequence, the one adjacent to the longest chain
     def getHead(self):
@@ -24,7 +24,7 @@ class Substituent():
     @staticmethod
     def getName(subs):
         #A mapping of names to a list of indices at which those names occur
-        indexDict = {(n, []) for n in Substituent.NAMES}
+        indexDict = dict((n, []) for n in Substituent.NAMES)
         for sub in subs:
             #Get the name of the substituent based on length alone
             name = sub.getAlphaName()
@@ -32,7 +32,8 @@ class Substituent():
             indexDict[name].append(sub.index)
         
         #Get a copy of the key, value pairs in a list of key, value tuples 
-        resultList = indexDict.items()[:]
+        resultList = [(name, indeces) for name, indeces in indexDict.items()]
+        print(resultList)
         #Sort the list based on the alphabetical order of the substituent type
         resultList.sort()
         #A list of substituent type strings
@@ -47,7 +48,7 @@ class Substituent():
                 #Then append the name of this substituent type to our list of names
                 subTypeStrs.append(subType)
         #Return the list of substituent type names, joined by hyphens
-        return subTypeStrs.join('-')
+        return '-'.join(subTypeStrs)
         
     @staticmethod
     def getNameOfSubType(subName, indeces):
@@ -58,11 +59,11 @@ class Substituent():
             #Cast our indices to strings so we can join them together
             strIndeces = map(str, indeces)
             #Join the indices together with a comma
-            indexStr = strIndeces.join(",")
+            indexStr = ','.join(strIndeces)
             #Get the relevant prefix based on how many times this 
             #type of substituent was found. That is, the 
             #number of indices, or the length of indices
-            prefix = Substituent.PREFIXES[len(indeces)]
+            prefix = Substituent.PREFIXES[len(indeces)-1]
             #return a string formatted such as '2,4-dimethyl'
             return indexStr+'-'+prefix+subName
         #This type of substituent was not present in the molecule

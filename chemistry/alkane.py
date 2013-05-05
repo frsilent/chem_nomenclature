@@ -31,7 +31,7 @@ class Alkane:
         self.longestChain = self.getLongestChain()
         #Throws BranchingCarbonChainError for malformed substituents
         self.substituents = self.getSubstituents()
-        self.head = self.getCorrectHead()
+        self.setCorrectHead()
 #        self.name = self.getName()
 #            raise error
 
@@ -104,7 +104,7 @@ class Alkane:
     
     #Get the correct head. That is, the end of the longest chain that
     # is closest to a substituent
-    def getCorrectHead(self):
+    def setCorrectHead(self):
         #Mapping of candidates for head (the ends of the longest chain) to distance of closest substituent
         candidates = [
             self.longestChain[0],
@@ -129,7 +129,15 @@ class Alkane:
         else:
             #Get the index of the candidate with the closest substituent
             winningIndex = closestDistances.index(min(closestDistances))
-            return candidates[winningIndex]
+            #Was the tail of self.longesetChain the correct head?
+            if winningIndex:
+                #Reverse the longest chain
+                self.longestChain.reverse()
+                #Set the correct head
+                self.head = self.longestChain[0]
+                #Get substituents again, so that their indices are correct
+                #Throws BranchingCarbonChainError for malformed substituents
+                self.substituents = self.getSubstituents()
         
         
 #    def createRandomAlkane(self):

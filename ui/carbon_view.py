@@ -83,7 +83,7 @@ class CarbonView(QtGui.QGraphicsView):
     def logicalToScreen(self, tuple):
         return (int(tuple[0]*self.col_width), int(tuple[1]*self.row_height))
     
-    def clearCarbons(self):
+    def clearImages(self):
         del self.carbonMatrix
         #Reset carbonMatrix to remove logical carbons
         self.carbonMatrix = []
@@ -100,7 +100,7 @@ class CarbonView(QtGui.QGraphicsView):
         return self.carbonMatrix
     
     def setScreenToAlkane(self, alkane):
-        self.clearCarbons()
+        self.clearImages()
         carbons = alkane.getCarbons()
         for element in carbons:
             x = element.x
