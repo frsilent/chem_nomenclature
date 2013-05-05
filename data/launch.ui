@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>60</y>
+      <y>30</y>
       <width>131</width>
       <height>91</height>
      </rect>
@@ -93,7 +93,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>130</y>
+      <y>140</y>
       <width>600</width>
       <height>300</height>
      </rect>
@@ -194,11 +194,11 @@
      <string>Correct!/Wrong</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="informationText">
     <property name="geometry">
      <rect>
       <x>630</x>
-      <y>230</y>
+      <y>240</y>
       <width>211</width>
       <height>201</height>
      </rect>
@@ -250,6 +250,19 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="additionalButton">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>30</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Get Additional Info</string>
     </property>
    </widget>
   </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'launch.ui'
 #
-# Created: Sun May  5 17:03:43 2013
+# Created: Sun May  5 18:51:38 2013
 #      by: PyQt4 UI code generator 4.10
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         self.randomButton.setGeometry(QtCore.QRect(30, 20, 151, 91))
         self.randomButton.setObjectName(_fromUtf8("randomButton"))
         self.animateButton = QtGui.QPushButton(self.centralwidget)
-        self.animateButton.setGeometry(QtCore.QRect(670, 60, 131, 91))
+        self.animateButton.setGeometry(QtCore.QRect(670, 30, 131, 91))
         self.animateButton.setObjectName(_fromUtf8("animateButton"))
         self.nomenclatureLabel = QtGui.QLabel(self.centralwidget)
         self.nomenclatureLabel.setGeometry(QtCore.QRect(210, 20, 111, 17))
@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.checkLabel.setText(_fromUtf8(""))
         self.checkLabel.setObjectName(_fromUtf8("checkLabel"))
         self.graphicsView = QtGui.QGraphicsView(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(20, 130, 600, 300))
+        self.graphicsView.setGeometry(QtCore.QRect(20, 140, 600, 300))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -78,9 +78,9 @@ class Ui_MainWindow(object):
         self.guessResultLabel.setGeometry(QtCore.QRect(210, 120, 111, 17))
         self.guessResultLabel.setVisible(False)
         self.guessResultLabel.setObjectName(_fromUtf8("guessResultLabel"))
-        self.plainTextEdit = QtGui.QPlainTextEdit(self.centralwidget)
-        self.plainTextEdit.setGeometry(QtCore.QRect(630, 230, 211, 201))
-        self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
+        self.informationText = QtGui.QPlainTextEdit(self.centralwidget)
+        self.informationText.setGeometry(QtCore.QRect(630, 240, 211, 201))
+        self.informationText.setObjectName(_fromUtf8("informationText"))
         self.backButton = QtGui.QPushButton(self.centralwidget)
         self.backButton.setGeometry(QtCore.QRect(680, 190, 28, 28))
         self.backButton.setStyleSheet(_fromUtf8("background-image: url(../data/back.png);"))
@@ -96,6 +96,9 @@ class Ui_MainWindow(object):
         self.stopButton.setStyleSheet(_fromUtf8("background-image: url(../data/stop.png);"))
         self.stopButton.setText(_fromUtf8(""))
         self.stopButton.setObjectName(_fromUtf8("stopButton"))
+        self.additionalButton = QtGui.QPushButton(self.centralwidget)
+        self.additionalButton.setGeometry(QtCore.QRect(490, 30, 141, 51))
+        self.additionalButton.setObjectName(_fromUtf8("additionalButton"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 848, 27))
@@ -117,4 +120,5 @@ class Ui_MainWindow(object):
         self.clearButton.setText(_translate("MainWindow", "Clear", None))
         self.getNameButton.setText(_translate("MainWindow", "Get Name", None))
         self.guessResultLabel.setText(_translate("MainWindow", "Correct!/Wrong", None))
+        self.additionalButton.setText(_translate("MainWindow", "Get Additional Info", None))
 

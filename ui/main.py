@@ -8,6 +8,7 @@ from chemistry.alkane import Alkane
 from chemistry.chem_exceptions import *
 from carbon_view import CarbonView
 from Animation import Animation
+from network import chemspipy
 
 class StartQT4(QtGui.QMainWindow):
 
@@ -25,6 +26,7 @@ class StartQT4(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.getNameButton,QtCore.SIGNAL("clicked()"),self.getName)
         QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.animate)
         QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.makeRandom)
+        QtCore.QObject.connect(self.ui.additionalButton,QtCore.SIGNAL("clicked()"),self.getWebInfo)
         
         self.animation = Animation()
 
@@ -82,7 +84,19 @@ class StartQT4(QtGui.QMainWindow):
     def animate(self):
         self.view.clearImages()
         self.view.passAlkane(self.molecule)
-    
+
+    def getWebInfo(self):
+        webMolecule = chemspipy.find_one(self.molecule.getName())
+        webMolecule.loadextendedcompoundinfo()
+        infoString = "Common Name: " + str(webMolecule.commonname)
+        infoString += "\nAverage Mass: " + str(webMolecule.averagemass)
+        infoString += "\nMolecular Weight: " + str(webMolecule.molecularweight)
+        infoString += "\nMono Isotopic Mass: " + str(webMolecule.monoisotopicmass)
+        infoString += "\nNominal Mass: " + str(webMolecule.nominalmass)
+
+        self.ui.informationText.setPlainText(infoString)
+
+
 if __name__ == '__main__':
     import sys
     app = QtGui.QApplication(sys.argv)
