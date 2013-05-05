@@ -35,9 +35,11 @@ class AnimateView(QtGui.QGraphicsView):
 
         #Creates next frame; clearing the screen and drawing all carbons again
         #Need to figure out constructor which will make a clean scene
-        #Alternatively copy frameList & delete all items in it
+        #Alternatively copy frameList[0] & delete all items in it
         self.frameList.append(Frame(QtGui.QGraphicsScene()))
-        self.advanceFrame()
+
+        #Creates next frame; Find longest chain
+        #Creates next frame; Find head of chain
 
 
     def advanceFrame(self):

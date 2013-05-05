@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>560</height>
+    <width>848</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,59 +27,13 @@
      <string>Random</string>
     </property>
    </widget>
-   <widget class="QLabel" name="smilesLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>51</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SMILES:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="inchiLabel">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>150</y>
-      <width>41</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>InChi</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="smilesBox">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>150</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="inchiBox">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>150</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="animateButton">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>40</y>
-      <width>81</width>
-      <height>41</height>
+      <x>670</x>
+      <y>60</y>
+      <width>131</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
@@ -104,22 +58,22 @@
      <rect>
       <x>210</x>
       <y>40</y>
-      <width>281</width>
+      <width>231</width>
       <height>41</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="checkButton">
+   <widget class="QPushButton" name="guessButton">
     <property name="geometry">
      <rect>
       <x>210</x>
       <y>90</y>
-      <width>87</width>
+      <width>91</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Check!</string>
+     <string>Submit Guess</string>
     </property>
    </widget>
    <widget class="QLabel" name="checkLabel">
@@ -139,7 +93,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>200</y>
+      <y>130</y>
       <width>600</width>
       <height>300</height>
      </rect>
@@ -198,7 +152,7 @@
    <widget class="QPushButton" name="clearButton">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>370</x>
       <y>90</y>
       <width>51</width>
       <height>27</height>
@@ -208,17 +162,17 @@
      <string>Clear</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="validateButton">
+   <widget class="QPushButton" name="getNameButton">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>300</x>
       <y>90</y>
-      <width>87</width>
+      <width>71</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Validate</string>
+     <string>Get Name</string>
     </property>
    </widget>
    <widget class="QLabel" name="guessResultLabel">
@@ -240,17 +194,62 @@
      <string>Correct!/Wrong</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="renderButton">
+   <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>130</y>
-      <width>98</width>
-      <height>27</height>
+      <x>630</x>
+      <y>230</y>
+      <width>211</width>
+      <height>201</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QPushButton" name="backButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>190</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(../data/back.png);</string>
+    </property>
     <property name="text">
-     <string>Render</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="forwardButton">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>190</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(../data/next.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopButton">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>190</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(../data/stop.png);</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -259,8 +258,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>635</width>
-     <height>25</height>
+     <width>848</width>
+     <height>27</height>
     </rect>
    </property>
   </widget>

@@ -5,8 +5,8 @@ from PyQt4 import QtCore, QtGui
 from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
 from chemistry.alkane import Alkane
-from ui.carbon_view import CarbonView
-from ui.AnimateView import AnimateView
+from carbon_view import CarbonView
+from AnimateView import AnimateView
 
 class StartQT4(QtGui.QMainWindow):
 
@@ -19,12 +19,11 @@ class StartQT4(QtGui.QMainWindow):
         self.molecule = None
 
         #function bindings
-        QtCore.QObject.connect(self.ui.validateButton,QtCore.SIGNAL("clicked()"),self.validate)
+        QtCore.QObject.connect(self.ui.guessButton,QtCore.SIGNAL("clicked()"),self.validate)
         QtCore.QObject.connect(self.ui.clearButton,QtCore.SIGNAL("clicked()"),self.clearMolecule)
-        QtCore.QObject.connect(self.ui.checkButton,QtCore.SIGNAL("clicked()"),self.checkGuess)
+        QtCore.QObject.connect(self.ui.getNameButton,QtCore.SIGNAL("clicked()"),self.checkGuess)
         QtCore.QObject.connect(self.ui.animateButton,QtCore.SIGNAL("clicked()"),self.animate)
         QtCore.QObject.connect(self.ui.randomButton,QtCore.SIGNAL("clicked()"),self.makeRandom)
-        QtCore.QObject.connect(self.ui.renderButton,QtCore.SIGNAL("clicked()"),self.renderAlkane)
 
     def validate(self):
         carbonMatrix = self.view.getCarbonMatrix()
