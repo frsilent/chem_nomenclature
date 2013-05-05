@@ -10,9 +10,9 @@ class Alkane:
     A class used to implement an organic compound.
     """
 
-    chain = ('methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane',
+    CHAIN_NAMES = ('methane','ethane','propane','butane','pentane','hexane','heptane','octane','nonane','decane',
              'undecane','dodecane','tridecane','tetradecane','pentadecane')
-    MAX_CHAIN_LENGTH = len(chain)
+    MAX_CHAIN_LENGTH = len(CHAIN_NAMES)
 #    def __init__(self, longestChain):
 #        self.carbons = longestChain[:]
 #        self.longestChain = longestChain
@@ -86,11 +86,15 @@ class Alkane:
                 subCarbon = getattr(current, subDirection)
                 if subCarbon:
                     #Throws BranchingCarbonChainError for malformed substituents
-                    subs.append(Substituent(current, subDirection, i))
+                    subs.append(Substituent(current, subDirection, i+1))
         return subs
 
     def getName(self):
-        basename = self.chain[len(self.getLongestChain())-1]
+        #The name of the molecule represented by the longest chain
+        basename = Alkane.CHAIN_NAMES[len(self.longestChain)-1]
+        #The part of the name derived from the substituents
+        subname = Substituent.getName(self.substituents)
+        return subname+basename
 
     def verify(self,guess):
         return guess == self.getName()
@@ -125,7 +129,6 @@ class Alkane:
         else:
             #Get the index of the candidate with the closest substituent
             winningIndex = closestDistances.index(min(closestDistances))
-            print(str(winningIndex))
             return candidates[winningIndex]
         
         
