@@ -168,7 +168,7 @@ class Alkane:
                 #Set the correct head
                 self.head = self.longestChain[0]
                 #Get substituents again, so that their indices are correct
-                self.substituents = self.setSubstituents()
+                self.setSubstituents()
         
     @staticmethod   
     def createRandomAlkane():
