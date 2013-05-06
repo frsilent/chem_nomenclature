@@ -39,6 +39,7 @@ class StartQT4(QtGui.QMainWindow):
         self.molecule = None
         self.ui.informationText.setPlainText("")
         self.ui.nomenclatureBox.setPlainText("")
+        self.ui.guessResultLabel.setVisible(False)
 
     def moleculeIsValid(self):
         carbonMatrix = self.view.getCarbonMatrix()
@@ -91,6 +92,7 @@ class StartQT4(QtGui.QMainWindow):
         self.view.setScreenToAlkane(self.molecule)
         
     def makeRandom(self):
+        self.clearMolecule()
         self.molecule = Alkane.createRandomAlkane()
         self.view.setScreenToAlkane(self.molecule)
 
