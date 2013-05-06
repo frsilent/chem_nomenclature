@@ -17,6 +17,13 @@ class Substituent():
             #Then raise an error
             raise SubstituentTooLargeError()
         self.index=index
+    
+    def __str__(self):
+        result = super().__str__() + "Index: %d\n" % self.index
+        for carbon in self.carbons:
+            result+=str(carbon)+"\n"
+        return result
+        
         
     #Return the name of this substituent without accounting
     #for its position or its neighbors
@@ -26,7 +33,7 @@ class Substituent():
     #Return the first carbon in the sequence, the one adjacent to the longest chain
     def getHead(self):
         return self.carbons[0]
-    
+    #Get portion of an alkane's name that is determined by this sequence of substituents
     @staticmethod
     def getName(substituentSequence):
         #Were we passed a sequence of substituents to name?
