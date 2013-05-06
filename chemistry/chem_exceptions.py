@@ -16,3 +16,15 @@ class BranchingCarbonChainError(Exception):
 class CarbonsNotAdjacentError(Exception):
     def __init__(self):
         super(Exception, self).__init__()
+        
+class LongestChainTooLongError(Exception):
+    def __init__(self):
+        super(Exception, self).__init__()
+        
+class TooManyOfOneSubstituentGroupError(Exception):
+    def __init__(self):
+        super(Exception, self).__init__()
+        
+class SubstituentTooLargeError(Exception):
+    def __init__(self):
+        super(Exception, self).__init__()

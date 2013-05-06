@@ -29,55 +29,67 @@ class StartQT4(QtGui.QMainWindow):
         self.animation = Animation()
 
     def guessButton(self):
-        carbonMatrix = self.view.getCarbonMatrix()
-        try:
-            self.molecule = Alkane(carbonMatrix)
-        except Exception as error:
-            print("Validation Error:")
-            print(error)
-            print(error.__class__)
-            exc_traceback = sys.exc_info()[2]
-            traceback.print_tb(exc_traceback, limit=100, file=sys.stdout)
+        if self.moleculeIsValid():
+            pass
 
     def clearMolecule(self):
         self.view.clearImages()
         self.molecule = None
 
-    def getName(self):
+    def moleculeIsValid(self):
         carbonMatrix = self.view.getCarbonMatrix()
+        alertUser = self.ui.nomenclatureBox.setPlainText
         try:
             self.molecule = Alkane(carbonMatrix)
-            self.ui.nomenclatureBox.setPlainText(self.molecule.getName())
+            return True
+        #Raised when no carbons were added in the draw view
         except EmptyAlkaneError:
-            self.ui.nomenclatureBox.setPlainText("Please click in the grid to add carbons")
+            alertUser("Please click in the grid to add carbons")
+            return False
+        #Raised when there are loops and blocks in the molecule
         except CyclicAlkaneError:
-            self.ui.nomenclatureBox.setPlainText("The molecule contains a loop or a block.")
-        except BranchingCarbonChainError:
-            self.ui.nomenclatureBox.setPlainText("Only straight-chain substituents are supported.")
+            alertUser("The molecule contains a loop or a block.")
+            return False
+        #Raised when not all of the carbons are adjacent
         except AlkaneNotConnectedError:
-            self.ui.nomenclatureBox.setPlainText("Not all of the carbons are connected.")
+            alertUser("Not all of the carbons are connected.")
+            return False
+        #Raised on malformed substituents
+        except BranchingCarbonChainError:
+            alertUser("Only straight-chain substituents are supported.")
+            return False
+        #Raised on molecules with chains that are too long
+        except LongestChainTooLongError:
+            alertUser("This molecule is too large for me to name.")
+            return False
+        #Raised on molecules with substituents that are too long
+        except SubstituentTooLargeError:
+            alertUser("This molecule has a substituent that is too long.")
+            return False
+        #Raised on molecules with too many of one type of substituent
+        except TooManyOfOneSubstituentGroupError:
+            alertUser("This molecule has too many of one kind of substituent.")
+            return False
+    
+
+    def getName(self):
+        if self.moleculeIsValid():
+            self.ui.nomenclatureBox.setPlainText(self.molecule.name)
 
     def checkGuess(self):
-        try:
-            self.ui.guessResultLabel.setVisible(True)
-            self.molecule.verify(self.ui.nomenclatureBox.toPlainText)
-            if self.molecule.verify(self.ui.nomenclatureBox.toPlainText):
-                self.ui.guessResultLabel.setText("Correct!")
-            else:
-                self.ui.guessResultLabel.setText("Incorrect")
-        except Exception as error:
-            print("Guess not made or molecule does not exist")
-            print(error)
-            print(error.__class__)
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            traceback.print_tb(exc_traceback, limit=100, file=sys.stdout)
+        self.ui.guessResultLabel.setVisible(True)
+        self.molecule.verify(self.ui.nomenclatureBox.toPlainText)
+        if self.molecule.verify(self.ui.nomenclatureBox.toPlainText):
+            self.ui.guessResultLabel.setText("Correct!")
+        else:
+            self.ui.guessResultLabel.setText("Incorrect")
 
     def renderAlkane(self):
         self.view.setScreenToAlkane(self.molecule)
         
     def makeRandom(self):
-        #TODO: Make and display random Alkane
-        pass
+        self.molecule = Alkane.createRandomAlkane()
+        self.view.setScreenToAlkane(self.molecule)
 
     def animate(self):
         self.view.clearImages()

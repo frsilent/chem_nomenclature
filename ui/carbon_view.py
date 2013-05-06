@@ -99,22 +99,18 @@ class CarbonView(QtGui.QGraphicsView):
     def getCarbonMatrix(self):
         return self.carbonMatrix
     
+    #Draw a predefined Alkane on our panel
     def setScreenToAlkane(self, alkane):
+        #Remove anything that was already drawn
         self.clearImages()
+        #Get a list of carbons to draw
         carbons = alkane.getCarbons()
         for element in carbons:
             x = element.x
             y = element.y
+            #Add this carbon to our logical matrix of carbons
             self.carbonMatrix[x][y]=self.scene.addPixmap(self.carbonImage)
             #Get top-left screen coordinates of this square 
             screen_pos = self.logicalToScreen((x,y))
             #Add carbon image to screen
             self.carbonMatrix[x][y].setOffset(*screen_pos)
-
-    def makeRandom(self):
-        #Make a random carbonMatrix
-        pass
-
-    def animate(self):
-        #Start the show
-        pass
