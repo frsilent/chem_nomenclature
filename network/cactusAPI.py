@@ -4,7 +4,7 @@
 CactusAPI
 
 Simple Python wrapper for the Cactus API.
-Used ChemSpiPy for inspiration/guidance
+Used ChemSpiPy for guidance
 
 """
 

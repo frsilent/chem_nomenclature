@@ -15,8 +15,7 @@ from xml.etree import ElementTree as ET
 
 # adds IUPAC Nomenclature as an attribute of the Compound class
 # pulled from http://cactus.nci.nih.gov/chemical/structure API
-from cactusAPI import get_iupac
-
+from network.cactusAPI import get_iupac
 
 __author__ = 'Matt Swain'
 __email__ = 'm.swain@me.com'
