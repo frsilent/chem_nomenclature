@@ -1,5 +1,3 @@
-__author__ = 'rheintze'
-
 #from chemspipy import *
 #from cactusAPI import get_csid
 from chemistry.carbon import Carbon

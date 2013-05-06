@@ -1,5 +1,3 @@
-__author__ = 'rheintze'
-
 import sys, traceback
 from PyQt4 import QtCore, QtGui
 from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool

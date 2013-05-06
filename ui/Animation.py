@@ -1,5 +1,3 @@
-__author__ = 'rheintze'
-
 from PyQt4 import QtCore, QtGui
 from Frame import Frame
 

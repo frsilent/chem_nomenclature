@@ -10,7 +10,6 @@ https://github.com/cameronneylon/ChemSpiPy
 import unittest
 
 from chemspipy import *
-
 class TestChemSpiPy(unittest.TestCase):
 
     def setUp(self):

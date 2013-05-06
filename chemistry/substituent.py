@@ -1,4 +1,3 @@
-from chemistry.carbon import Carbon
 from chemistry.chem_exceptions import SubstituentTooLargeError, TooManyOfOneSubstituentGroupError
 class Substituent():
     

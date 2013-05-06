@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'rheintze'
-
 """
 Unit tests for alkane.py
 """
