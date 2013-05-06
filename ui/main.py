@@ -32,7 +32,7 @@ class StartQT4(QtGui.QMainWindow):
 
     def guessButton(self):
         if self.moleculeIsValid():
-            pass
+            self.checkGuess()
 
     def clearMolecule(self):
         self.view.clearImages()
@@ -82,8 +82,7 @@ class StartQT4(QtGui.QMainWindow):
 
     def checkGuess(self):
         self.ui.guessResultLabel.setVisible(True)
-        self.molecule.verify(self.ui.nomenclatureBox.toPlainText)
-        if self.molecule.verify(self.ui.nomenclatureBox.toPlainText):
+        if self.molecule.verify(self.ui.nomenclatureBox.toPlainText()):
             self.ui.guessResultLabel.setText("Correct!")
         else:
             self.ui.guessResultLabel.setText("Incorrect")
