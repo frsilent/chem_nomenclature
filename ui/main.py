@@ -37,6 +37,8 @@ class StartQT4(QtGui.QMainWindow):
     def clearMolecule(self):
         self.view.clearImages()
         self.molecule = None
+        self.ui.informationText.setPlainText("")
+        self.ui.nomenclatureBox.setPlainText("")
 
     def moleculeIsValid(self):
         carbonMatrix = self.view.getCarbonMatrix()
@@ -98,15 +100,23 @@ class StartQT4(QtGui.QMainWindow):
         self.view.passAlkane(self.molecule)
 
     def getWebInfo(self):
-        webMolecule = chemspipy.find_one(self.molecule.getName())
-        webMolecule.loadextendedcompoundinfo()
-        infoString = "Common Name: " + str(webMolecule.commonname)
-        infoString += "\nAverage Mass: " + str(webMolecule.averagemass)
-        infoString += "\nMolecular Weight: " + str(webMolecule.molecularweight)
-        infoString += "\nMono Isotopic Mass: " + str(webMolecule.monoisotopicmass)
-        infoString += "\nNominal Mass: " + str(webMolecule.nominalmass)
-
-        self.ui.informationText.setPlainText(infoString)
+        if self.moleculeIsValid():
+            self.ui.nomenclatureBox.setPlainText(self.molecule.name)
+            try:
+                webMolecule = chemspipy.find_one(self.molecule.name)
+                if webMolecule:
+                    webMolecule.loadextendedcompoundinfo()
+                    infoString = "Common Name: " + str(webMolecule.commonname)
+                    infoString += "\nAverage Mass: " + str(webMolecule.averagemass)
+                    infoString += "\nMolecular Weight: " + str(webMolecule.molecularweight)
+                    infoString += "\nMono Isotopic Mass: " + str(webMolecule.monoisotopicmass)
+                    infoString += "\nNominal Mass: " + str(webMolecule.nominalmass)
+                else:
+                    infoString = "Molecule not found"
+            except:
+                infoString = "Could not connect to remote service."
+            
+            self.ui.informationText.setPlainText(infoString)
 
 
 if __name__ == '__main__':
