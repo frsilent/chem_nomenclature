@@ -1,5 +1,5 @@
 from PyQt4 import QtCore, QtGui
-
+import os
 class CarbonView(QtGui.QGraphicsView):
     def __init__(self, parent):
         QtGui.QWidget.__init__(self,parent)
@@ -25,7 +25,7 @@ class CarbonView(QtGui.QGraphicsView):
         self.scene.setSceneRect(0,0,600,300)
 
         #Load and resize image to fit squarely in the grid
-        self.carbonImage = QtGui.QPixmap('../data/carbon.png').scaled(self.col_width, self.row_height)
+        self.carbonImage = QtGui.QPixmap(os.path.abspath('data/carbon.png')).scaled(self.col_width, self.row_height)
         self.addGridToScene()
         
     def addGridToScene(self):

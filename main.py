@@ -1,11 +1,11 @@
 import sys, traceback
 from PyQt4 import QtCore, QtGui
-from ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
+from ui.ui import Ui_MainWindow #pulls from ui.py which can be created from .ui xml file using the pyuic tool
 
 from chemistry.alkane import Alkane
 from chemistry.chem_exceptions import *
-from carbon_view import CarbonView
-from Animation import Animation
+from ui.carbon_view import CarbonView
+from ui.Animation import Animation
 from network import chemspipy
 
 class StartQT4(QtGui.QMainWindow):
